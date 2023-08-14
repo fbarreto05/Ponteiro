@@ -1,0 +1,17 @@
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\bin\Debug\net6.0-windows\pontoapp.exe
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\bin\Debug\net6.0-windows\pontoapp.deps.json
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\bin\Debug\net6.0-windows\pontoapp.runtimeconfig.json
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\bin\Debug\net6.0-windows\pontoapp.dll
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\bin\Debug\net6.0-windows\pontoapp.pdb
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\net6.0-windows\pontoapp.homeForm.resources
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\net6.0-windows\pontoapp.Properties.Resources.resources
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\net6.0-windows\pontoapp.csproj.GenerateResource.cache
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\net6.0-windows\pontoapp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\net6.0-windows\pontoapp.AssemblyInfoInputs.cache
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\net6.0-windows\pontoapp.AssemblyInfo.cs
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\net6.0-windows\pontoapp.csproj.CoreCompileInputs.cache
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\net6.0-windows\pontoapp.dll
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\net6.0-windows\refint\pontoapp.dll
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\net6.0-windows\pontoapp.pdb
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\net6.0-windows\pontoapp.genruntimeconfig.cache
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\net6.0-windows\ref\pontoapp.dll

@@ -1,0 +1,5 @@
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\bin\Release\net6.0-windows\publish\pontoapp.exe
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\bin\Release\net6.0-windows\publish\pontoapp.dll
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\bin\Release\net6.0-windows\publish\pontoapp.deps.json
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\bin\Release\net6.0-windows\publish\pontoapp.runtimeconfig.json
+C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\bin\Release\net6.0-windows\publish\pontoapp.pdb
