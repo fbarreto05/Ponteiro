@@ -1,6 +1,7 @@
 # pontoapp
 COMO USAR O PROGRAMA
-Inicie cadastrando os usuários, atribuindo-lhes um nome e uma senha e apertando em "bater"
-Após isso, o sistema de login pode ser utilizado, a cada vez que um usuário preencher seus dados corretamente e apertar em "bater", seu status mudará.
-MUDANÇAS NECESSÁRIAS
-Impedir a criação de dois nomes iguais
+* Para cadastrar um usuário, insira as credenciais desejadas e pressione o botão de "cadastrar"
+* Para apagar um usuário, insira suas credenciais criadas anteriormente e pressione o botão de "apagar"
+
+* Para indicar sua entrada, insira suas credenciais e pressione o botão "bater"
+* Para indicar sua saída, repita o mesmo passo, e assim sucessivamente
