@@ -12,6 +12,7 @@ namespace pontoapp
         }
 
         //"Banco de dados"
+
         List<string> loginsLIST = new List<string>();
         List<string> senhasLIST = new List<string>();
         List<string> estadosLIST = new List<string>();
@@ -19,6 +20,7 @@ namespace pontoapp
         //Botão bater
         private void baterBT_Click(object sender, EventArgs e)
         {
+            loginTXT.Text = loginTXT.Text.ToUpper();
             if (loginsLIST.Contains(loginTXT.Text))
             {
                 if (senhasLIST[loginsLIST.IndexOf(loginTXT.Text)] == senhaTXT.Text)
@@ -52,9 +54,10 @@ namespace pontoapp
         //Botão cadastrar
         private void cadastrarBT_Click(object sender, EventArgs e)
         {
+            loginTXT.Text = loginTXT.Text.ToUpper();
             if (!(loginsLIST.Contains(loginTXT.Text)))
             {
-                if(loginTXT.Text == "" || senhaTXT.Text == "")
+                if (loginTXT.Text == "" || senhaTXT.Text == "")
                 {
                     MessageBox.Show("Por favor, preencha todos os campos");
                 }
@@ -76,6 +79,7 @@ namespace pontoapp
         //Botão apagar
         private void apagarBT_Click(object sender, EventArgs e)
         {
+            loginTXT.Text = loginTXT.Text.ToUpper();
             if (loginsLIST.Contains(loginTXT.Text))
             {
                 if (senhasLIST[loginsLIST.IndexOf(loginTXT.Text)] == senhaTXT.Text)

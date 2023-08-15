@@ -100,6 +100,7 @@
             // 
             senhaTXT.Location = new Point(64, 51);
             senhaTXT.Name = "senhaTXT";
+            senhaTXT.PasswordChar = '*';
             senhaTXT.Size = new Size(164, 23);
             senhaTXT.TabIndex = 5;
             // 
@@ -113,23 +114,23 @@
             baterBT.UseVisualStyleBackColor = true;
             baterBT.Click += baterBT_Click;
             // 
-            // panel1
+            // logoPAN
             // 
             logoPAN.Controls.Add(logoPIC);
             logoPAN.Controls.Add(titleLBL);
             logoPAN.Location = new Point(76, 12);
-            logoPAN.Name = "panel1";
+            logoPAN.Name = "logoPAN";
             logoPAN.Size = new Size(112, 111);
             logoPAN.TabIndex = 7;
             // 
-            // panel2
+            // inputPAN
             // 
             inputPAN.Controls.Add(senhaTXT);
             inputPAN.Controls.Add(loginLBL);
             inputPAN.Controls.Add(senhaLBL);
             inputPAN.Controls.Add(loginTXT);
             inputPAN.Location = new Point(3, 121);
-            inputPAN.Name = "panel2";
+            inputPAN.Name = "inputPAN";
             inputPAN.Size = new Size(231, 83);
             inputPAN.TabIndex = 8;
             // 
@@ -195,13 +196,13 @@
             apagarBT.UseVisualStyleBackColor = true;
             apagarBT.Click += apagarBT_Click;
             // 
-            // panel3
+            // botoesPAN
             // 
             botoesPAN.Controls.Add(apagarBT);
             botoesPAN.Controls.Add(baterBT);
             botoesPAN.Controls.Add(cadastrarBT);
             botoesPAN.Location = new Point(12, 209);
-            botoesPAN.Name = "panel3";
+            botoesPAN.Name = "botoesPAN";
             botoesPAN.Size = new Size(222, 78);
             botoesPAN.TabIndex = 31;
             // 
@@ -216,6 +217,7 @@
             Controls.Add(ppllistSPLT);
             Controls.Add(inputPAN);
             Controls.Add(logoPAN);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "homeForm";
             Text = "pontoapp";
             ((System.ComponentModel.ISupportInitialize)logoPIC).EndInit();
