@@ -29,7 +29,7 @@ namespace pontoapp
                     {
                         estadosLIST[loginsLIST.IndexOf(loginTXT.Text)] = "Ativo";
 
-                        namelistLISTB.Items[loginsLIST.IndexOf(loginTXT.Text)] = "Ativo || " + loginTXT.Text;
+                        namelistLISTB.Items[loginsLIST.IndexOf(loginTXT.Text)] = "Ativo || " + loginTXT.Text + " || " + DateTime.Today.ToString("dd/MM/yy") + " " + DateTime.Now.ToString("hh:mm");
 
                         MessageBox.Show(loginTXT.Text + " Entrou!");
                     }
@@ -37,7 +37,7 @@ namespace pontoapp
                     {
                         estadosLIST[loginsLIST.IndexOf(loginTXT.Text)] = "Inativo";
 
-                        namelistLISTB.Items[loginsLIST.IndexOf(loginTXT.Text)] = "Inativo || " + loginTXT.Text;
+                        namelistLISTB.Items[loginsLIST.IndexOf(loginTXT.Text)] = "Inativo || " + loginTXT.Text + " || " + DateTime.Today.ToString("dd/MM/yy") + " " + DateTime.Now.ToString("hh:mm"); 
 
                         MessageBox.Show(loginTXT.Text + " Saiu!");
                     }
