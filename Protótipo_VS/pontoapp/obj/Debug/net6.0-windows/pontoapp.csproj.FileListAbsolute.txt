@@ -15,3 +15,20 @@ C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\ne
 C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\net6.0-windows\pontoapp.pdb
 C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\net6.0-windows\pontoapp.genruntimeconfig.cache
 C:\Users\ferna_tafvbns\OneDrive\Área de Trabalho\pontoapp\pontoapp\obj\Debug\net6.0-windows\ref\pontoapp.dll
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\bin\Debug\net6.0-windows\pontoapp.exe
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\bin\Debug\net6.0-windows\pontoapp.deps.json
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\bin\Debug\net6.0-windows\pontoapp.runtimeconfig.json
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\bin\Debug\net6.0-windows\pontoapp.dll
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\bin\Debug\net6.0-windows\pontoapp.pdb
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\obj\Debug\net6.0-windows\pontoapp.homeForm.resources
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\obj\Debug\net6.0-windows\pontoapp.Properties.Resources.resources
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\obj\Debug\net6.0-windows\pontoapp.csproj.GenerateResource.cache
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\obj\Debug\net6.0-windows\pontoapp.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\obj\Debug\net6.0-windows\pontoapp.AssemblyInfoInputs.cache
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\obj\Debug\net6.0-windows\pontoapp.AssemblyInfo.cs
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\obj\Debug\net6.0-windows\pontoapp.csproj.CoreCompileInputs.cache
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\obj\Debug\net6.0-windows\pontoapp.dll
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\obj\Debug\net6.0-windows\refint\pontoapp.dll
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\obj\Debug\net6.0-windows\pontoapp.pdb
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\obj\Debug\net6.0-windows\pontoapp.genruntimeconfig.cache
+D:\Repository\pontoapp\Protótipo_VS\pontoapp\obj\Debug\net6.0-windows\ref\pontoapp.dll
