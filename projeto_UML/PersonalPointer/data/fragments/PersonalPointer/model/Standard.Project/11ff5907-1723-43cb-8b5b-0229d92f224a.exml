@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="PersonalPointer" version="4">
+  <OBJECT>
+    <ID name="PersonalPointer" mc="Standard.Project" uid="11ff5907-1723-43cb-8b5b-0229d92f224a"/>
+    <ATTRIBUTES>
+      <ATT name="ProjectContext"></ATT>
+      <ATT name="ProjectDescr"></ATT>
+      <ATT name="Name"><![CDATA[PersonalPointer]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="Model">
+        <COMPID name="personalpointer" mc="Standard.Package" uid="352e8356-4912-42fb-8a86-795040659a36"/>
+      </COMP>
+      <COMP relation="DiagramRoot">
+        <COMPID name="PersonalPointer" mc="Infrastructure.DiagramSet" uid="b549005a-eae3-41e4-946b-1fcf308e4704"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
