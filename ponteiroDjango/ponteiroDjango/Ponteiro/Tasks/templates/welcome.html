@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Ponteiro</title>
+    <link rel="stylesheet" href="{% static 'css/titleStyle.css' %}">
+    <img src="{% static 'img/logo.png' %}" alt="Logo do site">
+</head>
+
+<body>
+    <h1>Bem-vindo, {{ login }}</h1>
+    <a href="/ponteiro/login/logout/"> <button>Sair</button> </a>
+</body>
+
+<footer>
+    <hr />
+    <i>PONTEIRO IFSP &copy;</i>
+</footer>
+
+</html>
