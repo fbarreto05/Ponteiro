@@ -1,0 +1,109 @@
+header
+{
+    margin-left: 150px;
+}
+
+
+body 
+{
+    font-family: Helvetica;
+    text-align: center;
+    background-color: rgb(75, 75, 75);
+}
+
+.imghome
+{
+    margin-right: 10px;
+    display: inline;
+    text-decoration: none;
+}
+
+h1
+{
+    margin-top: 0;
+    color:orangered;
+}
+
+b
+{
+    margin-left:150px;
+}
+
+form 
+{
+    max-width: 300px;
+    margin-bottom: 10px;
+    margin: 0 auto;
+    size: 20%;
+    margin-left: 875px;
+}
+
+form input
+{
+    width: 300px;
+    height: 40px;
+    font-size: medium;
+}
+
+form input[type="submit"]
+{
+    width: 300px;
+    height: 40px;
+    font-size: medium;
+    background-color: orangered;
+}
+
+form label,
+form input,
+form textarea 
+{
+    display: block;
+    margin-bottom: 10px;
+    margin: 0 auto;
+    size: 20%;
+}
+
+nav img
+{
+    height: 150px;
+    width: 150px;
+    border: 2px solid white;
+    border-radius: 2px;
+}
+
+nav
+{
+    height: 100%;
+    width: 12%;
+    background-color: orangered;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+nav a
+{
+    font-size: 25px;
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 20% 10%;
+}
+
+nav a:hover
+{
+    color: orangered;
+    background-color: white;
+}
+
+hr
+{
+    border-color: orangered;
+}
+
+i {
+    margin-left: 150px;
+    color: orangered;
+}

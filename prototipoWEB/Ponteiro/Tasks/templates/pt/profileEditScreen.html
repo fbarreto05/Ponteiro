@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Ponteiro</title>
+    <link rel="stylesheet" href="{% static 'css/' %}{{ theme }}/profileEditStyle.css">
+</head>
+
+<body>
+
+    <header>
+        <a class="imghome" href="/ponteiro/{{ id }}/home"><img src="{% static 'img/logo.png' %}" alt="Logo do site"></a>
+        <hr />
+    </header>
+
+    {% if error == '0' %}
+    <b>As mudanças foram efetuadas com sucesso!</b>
+    <br />
+    <br />
+    {% endif %}
+
+    {% if error == '1' %}
+    <b>As mudanças não foram efetuadas, a foto é inválida</b>
+    <br />
+    <br />
+    {% endif %}
+
+    {% if error == '2' %}
+        <b>As mudanças não foram efetuadas, a descrição deve conter, no máximo, 800 caracteres</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '3' %}
+        <b>As mudanças não foram efetuadas, a senha deve conter entre 5 e 20 caracteres</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '4' %}
+        <b>Não foi detectada nenhuma mudança</b>
+        <br />
+        <br />
+    {% endif %}
+
+    <form action="{% url 'profileeditValidate' id=id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="fileInput">Foto</label>
+        <input type="file" name="picture">
+        <textarea class="description" placeholder="Descrição: " name="description"></textarea>
+        <input type="password" placeholder="Senha: " name="password">
+        <input type="submit" value="Editar">
+    </form>
+
+    <nav class="sidebar">
+        <br />
+        <br />
+        <br />
+        <img src="{{ picture.url }}" alt="Imagem do perfil">
+        <a href="/ponteiro/{{ id }}/profile/">Perfil</a>
+        <a href="/ponteiro/{{ id }}/userSearch/">Buscar usuário</a>
+        <a href="/ponteiro/{{ id }}/home/">Início</a>
+        <a href="/ponteiro/{{ id }}/notifications/">Notificações</a>
+        <a href="/ponteiro/{{ id }}/config/">Configurações</a>
+        <a href="/ponteiro/{{ id }}/logout/">Sair</a>
+    </nav>
+
+    <footer>
+        <hr />
+        <i>PONTEIRO IFSP &copy;</i>
+    </footer>
+
+</body>
+
+</html>

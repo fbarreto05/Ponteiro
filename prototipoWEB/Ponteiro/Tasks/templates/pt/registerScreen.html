@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Ponteiro</title>
+    <link rel="stylesheet" href="{% static 'css/registerStyle.css' %}">
+</head>
+
+<body>
+
+    <header>
+        <a href="/ponteiro"><img src="{% static 'img/logoTitle.png' %}" alt="Logo do site"></a>
+        <br />
+        <br />
+        <a href="/ponteiro/login" class="change"> Mudar para Entrada</a>
+        <hr />
+    </header>
+
+    {% if error == '0' %}
+    <b>Cadastro realizado com sucesso!</b>
+    <br />
+    <br />
+    {% endif %}
+
+    {% if error == '1' %}
+    <b>O cadastro não foi realizado, a foto é inválida</b>
+    <br />
+    <br />
+    {% endif %}
+
+    {% if error == '2' %}
+        <b>O cadastro não foi realizado, já existe outra conta com o mesmo identificador</b>
+        <br />
+        <br />
+    {% endif %}
+    
+    {% if error == '3' %}
+        <b>O cadastro não foi realizado, campos obrigatórios estão vazios</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '4' %}
+        <b>O cadastro não foi realizado, o campo de identificador contém caracteres inválidos</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '5' %}
+    <b>O cadastro não foi realizado, os campos obrigatórios devem conter pelo menos 5 caracteres</b>
+    <br />
+    <br />
+    {% endif %}
+
+    {% if error == '6' %}
+        <b>O cadastro não foi realizado, limite de 20 caracteres em identificador ou senha foi ultrapassado</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '7' %}
+        <b>O cadastro não foi realizado, limite de 80 caracteres em nome foi ultrapassado</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '8' %}
+        <b>O cadastro não foi realizado, limite de 800 caracteres em descrição foi ultrapassado</b>
+        <br />
+        <br />
+    {% endif %}
+
+
+    <form action="{% url 'registerValidate' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="fileInput">Foto</label>
+        <input type="file" name="picture">
+        <input type="text" placeholder="*Nome: " name="username">
+        <input type="text" placeholder="*Identificador: " name="userid">
+        <textarea class="description" placeholder="Descrição: " name="userdescription"></textarea>
+        <input type="password" placeholder="*Senha: " name="userpass">
+        <input type="submit" value="Cadastrar">
+    </form>
+
+    <footer>
+        <hr />
+        <i>PONTEIRO IFSP &copy;</i>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Pointer</title>
+    <link rel="stylesheet" href="{% static 'css/loginStyle.css' %}">
+</head>
+
+<body>
+
+    <header>
+        <a href="/ponteiro"><img src="{% static 'img/logoTitle.png' %}" alt="Site logo"></a>
+        <br />
+        <br />
+        <a href="/ponteiro/register" class="change"> Change to register </a>
+        <hr />
+    </header>
+        
+    {% if error == '0' %}
+        <b>The account was successfully deleted!</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '1' %}
+        <b>Please, fill all the credentials</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '2' %}
+        <b>There was not found any account with this credentials</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '3' %}
+        <b>Please, enter any account before entering the system</b>
+        <br />
+        <br />
+    {% endif %}
+
+    <form action="{% url 'loginValidate' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="Identifier: " name="userid">
+        <input type="password" placeholder="Password: " name="userpass">
+        <input type="submit" value="Enter">
+    </form>
+
+    <footer>
+        <hr />
+        <i>IFSP POINTER &copy;</i>
+    </footer>
+</body>
+
+</html>

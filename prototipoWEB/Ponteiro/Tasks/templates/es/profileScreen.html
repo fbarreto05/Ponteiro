@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es-es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Puntero</title>
+    <link rel="stylesheet" href="{% static 'css/' %}{{ theme }}/profileStyle.css">
+</head>
+
+<body>
+
+<header>
+    <a class="imghome" href="/ponteiro/{{ id }}/home"><img src="{% static 'img/logo.png' %}" alt="Logotipo del site"></a>
+</header>
+
+<nav class="sidebar">
+    <br />
+    <br />
+    <br />
+    <img src="{{ picture.url }}" alt="Imagen de perfil">
+    <a href="/ponteiro/{{ id }}/profile/">Perfil</a>
+    <a href="/ponteiro/{{ id }}/userSearch/">Buscar usuario</a>
+    <a href="/ponteiro/{{ id }}/home/">Inicio</a>
+    <a href="/ponteiro/{{ id }}/notifications/">Notificaciones</a>
+    <a href="/ponteiro/{{ id }}/config/">Ajustes</a>
+    <a href="/ponteiro/{{ id }}/logout/">Salir</a>
+</nav>
+
+
+<main>
+    <hr />
+    <h1>Perfil</h1>
+    <img class="profilepic" src="{{ picture.url }}" alt="Imagen de perfil">
+    <p>Nombre: {{ name }}</p>
+    <p>Identificador: {{ id }}</p>
+    <p>Descripción: {{ description }}</p>
+    <p>Contraseña: {{ password }}</p>
+    <br />
+    <br />
+    <a href="/ponteiro/{{ id }}/profile/edit">Editar</a>
+    <a href="/ponteiro/{{ id }}/profile/delete">Borrar</a>
+    <br />
+    <br />
+</main>
+
+<footer>
+    <hr />
+    <i>PUNTERO IFSP &copy;</i>
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es-es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Puntero</title>
+    <link rel="stylesheet" href="{% static 'css/loginStyle.css' %}">
+</head>
+
+<body>
+
+    <header>
+        <a href="/ponteiro"><img src="{% static 'img/logoTitle.png' %}" alt="Logotipo del site"></a>
+        <br />
+        <br />
+        <a href="/ponteiro/register" class="change"> Cambiar a registro</a>
+        <hr />
+    </header>
+        
+    {% if error == '0' %}
+        <b>¡Cuenta eliminada exitosamente!</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '1' %}
+        <b>Por favor, complete todas las credenciales</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '2' %}
+        <b>No se encontró ninguna cuenta con estas credenciales</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '3' %}
+        <b>Por favor inicie sesión en su cuenta antes de acceder al sistema</b>
+        <br />
+        <br />
+    {% endif %}
+
+    <form action="{% url 'loginValidate' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="Identificador: " name="userid">
+        <input type="password" placeholder="Contraseña: " name="userpass">
+        <input type="submit" value="Entrar">
+    </form>
+
+    <footer>
+        <hr />
+        <i>PUNTERO IFSP &copy;</i>
+    </footer>
+</body>
+
+</html>

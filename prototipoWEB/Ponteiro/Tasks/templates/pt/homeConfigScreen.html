@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Ponteiro</title>
+    <link rel="stylesheet" href="{% static 'css/' %}{{ theme }}/homeConfigStyle.css">
+</head>
+
+<body>
+
+<header>
+    <a class="imghome" href="/ponteiro/{{ id }}/home"><img src="{% static 'img/logo.png' %}" alt="Logo do site"></a>
+    <hr />
+</header>
+
+<nav class="sidebar">
+    <br />
+    <br />
+    <br />
+    <img src="{{ picture.url }}" alt="Imagem do perfil">
+    <a href="/ponteiro/{{ id }}/profile/">Perfil</a>
+    <a href="/ponteiro/{{ id }}/userSearch/">Buscar usuário</a>
+    <a href="/ponteiro/{{ id }}/home/">Início</a>
+    <a href="/ponteiro/{{ id }}/notifications/">Notificações</a>
+    <a href="/ponteiro/{{ id }}/config/">Configurações</a>
+    <a href="/ponteiro/{{ id }}/logout/">Sair</a>
+</nav>
+
+<main>
+    <div class="theme">
+        <p>Tema: </p>
+        <a href="/ponteiro/{{ id }}/configvalidate/?themechange=light">Claro</a>
+        <a href="/ponteiro/{{ id }}/configvalidate/?themechange=dark">Escuro</a>
+    </div>
+    <br />
+    <div class="language">
+        <p>Idioma: </p>
+        <a href="/ponteiro/{{ id }}/configvalidate/?languagechange=pt">Português</a>
+        <a href="/ponteiro/{{ id }}/configvalidate/?languagechange=en">Inglês</a>
+        <a href="/ponteiro/{{ id }}/configvalidate/?languagechange=es">Espanhol</a>
+    </div>
+</main>
+
+<footer>
+    <hr />
+    <i>PONTEIRO IFSP &copy;</i>
+</footer>
+
+</body>
+
+</html>

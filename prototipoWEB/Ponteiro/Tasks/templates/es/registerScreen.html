@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es-es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Puntero</title>
+    <link rel="stylesheet" href="{% static 'css/registerStyle.css' %}">
+</head>
+
+<body>
+
+    <header>
+        <a href="/ponteiro"><img src="{% static 'img/logoTitle.png' %}" alt="Logotipo del site"></a>
+        <br />
+        <br />
+        <a href="/ponteiro/login" class="change"> Cambiar a entrada</a>
+        <hr />
+    </header>
+
+    {% if error == '0' %}
+    <b>¡Registro completado exitosamente!</b>
+    <br />
+    <br />
+    {% endif %}
+
+    {% if error == '1' %}
+    <b>El registro no se completó, la foto queda invalida</b>
+    <br />
+    <br />
+    {% endif %}
+
+    {% if error == '2' %}
+        <b>El registro no se completó, ya existe otra cuenta con el mismo identificador</b>
+        <br />
+        <br />
+    {% endif %}
+    
+    {% if error == '3' %}
+        <b>El registro no se completó, los campos obligatorios están vacíos</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '4' %}
+        <b>El registro no se realizó, el campo del identificador contiene caracteres no válidos</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '5' %}
+    <b>No se realizó el registro, los campos obligatorios deben contener al menos 5 caracteres</b>
+    <br />
+    <br />
+    {% endif %}
+
+    {% if error == '6' %}
+        <b>No se realizó el registro, se superó el límite de 20 caracteres en el identificador o contraseña</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '7' %}
+        <b>El registro no se realizó, se excedió el límite de 80 caracteres en el nombre</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '8' %}
+        <b>El registro no se realizó, se superó el límite de 800 caracteres en la descripción.</b>
+        <br />
+        <br />
+    {% endif %}
+
+
+    <form action="{% url 'registerValidate' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="fileInput">Foto</label>
+        <input type="file" name="picture">
+        <input type="text" placeholder="*Nombre: " name="username">
+        <input type="text" placeholder="*Identificador: " name="userid">
+        <textarea class="description" placeholder="Descripción: " name="userdescription"></textarea>
+        <input type="password" placeholder="*Contraseña: " name="userpass">
+        <input type="submit" value="Registrar">
+    </form>
+
+    <footer>
+        <hr />
+        <i>PUNTERO IFSP &copy;</i>
+    </footer>
+
+</body>
+
+</html>

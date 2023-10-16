@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es-es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Puntero</title>
+    <link rel="stylesheet" href="{% static 'css/' %}{{ theme }}/notificationsStyle.css">
+</head>
+
+<body>
+
+<header>
+    <a class="imghome" href="/ponteiro/{{ id }}/home"><img src="{% static 'img/logo.png' %}" alt="Logotipo del site"></a>
+    
+    <a class="topbar" href="/ponteiro/{{ id }}/notifications/?screen=messages">Mensajes</a>
+    <a class="topbar" href="/ponteiro/{{ id }}/notifications/?screen=additions">Adiciones</a>
+    <a class="topbar" href="/ponteiro/{{ id }}/notifications/?screen=groups">Grupos</a>
+    <hr />
+</header>
+
+<nav class="sidebar">
+    <br />
+    <br />
+    <br />
+    <img src="{{ picture.url }}" alt="Imagen de perfil">
+    <a href="/ponteiro/{{ id }}/profile/">Perfil</a>
+    <a href="/ponteiro/{{ id }}/userSearch/">Buscar usuario</a>
+    <a href="/ponteiro/{{ id }}/home/">Inicio</a>
+    <a href="/ponteiro/{{ id }}/notifications/">Notificaciones</a>
+    <a href="/ponteiro/{{ id }}/config/">Ajustes</a>
+    <a href="/ponteiro/{{ id }}/logout/">Salir</a>
+</nav>
+
+<main>
+    {% if screen == 'messages' %}
+    <div class="messages">
+        <p>¡Los mensajes recibidos se mostrarán aquí!</p>
+    </div>
+    {% elif screen == 'additions' %}
+    <div class="additions">
+        <p>¡Las confirmaciones y solicitudes de adiciones se mostrarán aquí!</p>
+    </div>
+    {% elif screen == 'groups' %}
+    <div class="groups">
+        <p>¡Las confirmaciones y solicitudes para unirse a grupos se mostrarán aquí!</p>
+    </div>
+    {% else %}
+    <div class="Empty">
+        <p>^ ¡Elija un tono de notificación para ver! ^</p>
+    </div>
+    {% endif %}
+</main>
+
+<footer>
+    <hr />
+    <i>PUNTERO IFSP &copy;</i>
+</footer>
+
+</body>
+
+</html>

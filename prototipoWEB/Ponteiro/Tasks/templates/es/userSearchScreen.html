@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es-es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Puntero</title>
+    <link rel="stylesheet" href="{% static 'css/' %}{{ theme }}/userSearchStyle.css">
+</head>
+
+<body>
+
+    <header>
+        <a class="imghome" href="/ponteiro/{{ id }}/home"><img src="{% static 'img/logo.png' %}" alt="Logotipo del site"></a>
+        <br />
+        <br />
+        <h1>Buscar usuario</h1>
+        <hr />
+    </header>
+            
+    {% if error == '1' %}
+        <b>Por favor proporcione el identificador de usuario</b>
+        <br />
+        <br />
+    {% endif %}
+    {% if error == '2' %}
+        <b>El usuario no fue encontrado</b>
+        <br />
+        <br />
+    {% endif %}
+
+    <form action="{% url 'searchValidate' id=id %}" method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="Identificador: " name="usersearchid">
+        <input type="submit" value="Buscar">
+    </form>
+
+    <nav class="sidebar">
+        <br />
+        <br />
+        <br />
+        <img src="{{ picture.url }}" alt="Imagen de perfil">
+        <a href="/ponteiro/{{ id }}/profile/">Perfil</a>
+        <a href="/ponteiro/{{ id }}/userSearch/">Buscar usuario</a>
+        <a href="/ponteiro/{{ id }}/home/">Inicio</a>
+        <a href="/ponteiro/{{ id }}/notifications/">Notificaciones</a>
+        <a href="/ponteiro/{{ id }}/config/">Ajustes</a>
+        <a href="/ponteiro/{{ id }}/logout/">Salir</a>
+    </nav>
+
+    <footer>
+        <hr />
+        <i>PUNTERO IFSP &copy;</i>
+    </footer>
+</body>
+
+</html>

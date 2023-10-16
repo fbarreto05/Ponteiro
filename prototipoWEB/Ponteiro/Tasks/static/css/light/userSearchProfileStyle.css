@@ -1,0 +1,112 @@
+header
+{
+    margin-left: 150px;
+}
+
+
+body 
+{
+    font-family: Helvetica;
+    text-align: center;
+    background-color: white;
+}
+
+.imghome
+{
+    margin-right: 10px;
+    display: inline;
+    text-decoration: none;
+}
+
+h1 {
+    color: orangered;
+    display: block;
+    margin-left: 150px;
+}
+
+.profilepic 
+{
+    top: 20px;
+    height: 300px;
+    width: 300px;
+    border: 2px solid orangered;
+    border-radius: 2px;
+    margin-left: 150px;
+}
+
+p 
+{
+    color: orangered;
+    font-size: 25px;
+    border: 1px solid orangered;
+    max-width: 600px;
+    word-wrap: break-word;
+    margin: 0 auto;
+    margin-left: 700px;
+}
+
+div a
+{
+    text-decoration: underline;
+    color: orangered;
+    font-size: 25px;
+    margin-top: 0px;
+    margin-right: 10px;
+    margin-left: 155px;
+}
+
+div a:hover
+{
+    color: white;
+    background-color: orangered;
+}
+
+
+nav img
+{
+    height: 150px;
+    width: 150px;
+    border: 2px solid white;
+    border-radius: 2px;
+
+}
+
+nav
+{
+    height: 100%;
+    width: 12%;
+    background-color: orangered;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+nav a
+{
+    font-size: 25px;
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 20% 10%;
+}
+
+nav a:hover
+{
+    color: orangered;
+    background-color: white;
+}
+
+hr
+{
+    border-color: orangered;
+}
+
+i 
+{
+    margin-left: 150px;
+    color: orangered;
+}
+
+

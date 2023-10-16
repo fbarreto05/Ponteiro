@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Pointer</title>
+    <link rel="stylesheet" href="{% static 'css/' %}{{ theme }}/userSearchProfileStyle.css">
+    </head>
+
+<body>
+
+    <header>
+        <a class="imghome" href="/ponteiro/{{ id }}/home"><img src="{% static 'img/logo.png' %}" alt="Site logo"></a>
+        <br />
+        <hr />
+    </header>
+            
+    <div>
+        <h1>Profile</h1>
+        <img class="profilepic" src="{{ pictureSearched.url }}" alt="Profile image">
+        <p>Name: {{ name }}</p>
+        <p>Identifier: {{ idSearched }} </p>
+        <p>Description: {{ description }}</p>
+        <br />
+        <br />
+        <a href="">Add</a>
+        <a href="">Message</a>
+        <a href="">Block</a>
+        <br />
+        <br />
+    </div>
+
+    <nav class="sidebar">
+        <br />
+        <br />
+        <br />
+        <img src="{{ picture.url }}" alt="Profile image">
+        <a href="/ponteiro/{{ id }}/profile/">Profile</a>
+        <a href="/ponteiro/{{ id }}/userSearch/">Search user</a>
+        <a href="/ponteiro/{{ id }}/home/">Home</a>
+        <a href="/ponteiro/{{ id }}/notifications/">Notifications</a>
+        <a href="/ponteiro/{{ id }}/config/">Configurations</a>
+        <a href="/ponteiro/{{ id }}/logout/">Logout</a>
+    </nav>
+
+    <footer>
+        <hr />
+        <i> IFSP POINTER &copy;</i>
+    </footer>
+</body>
+
+</html>
