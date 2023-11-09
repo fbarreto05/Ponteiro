@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Ponteiro</title>
+    <link rel="stylesheet" href="{% static 'css/' %}{{ theme }}/createGroupStyle.css">
+</head>
+
+<body>
+
+    <header>
+        <a class="imghome" href="/ponteiro/{{ id }}/home"><img src="{% static 'img/logo.png' %}" alt="Logo do site"></a>
+        <hr />
+    </header>
+
+    {% if error == '0' %}
+    <b>O grupo foi criado com sucesso!</b>
+    <br />
+    <br />
+    {% endif %}
+
+    {% if error == '1' %}
+    <b>Erro ao gerar a chave do grupo, tente novamente.</b>
+    <br />
+    <br />
+    {% endif %}
+
+    {% if error == '2' %}
+        <b>O grupo não foi criado, a foto é inválida.</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '3' %}
+        <b>O grupo não foi criado, o campo de nome está vazio.</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '4' %}
+        <b>O grupo não foi criado, o campo de nome deve ter pelo menos 5 caracteres.</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '5' %}
+        <b>O grupo não foi criado, o campo de nome deve ter no máximo 80 caracteres.</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '6' %}
+        <b>O grupo não foi criado, o campo de descrição deve ter no máximo 800 caracteres.</b>
+        <br />
+        <br />
+    {% endif %}
+
+    <form action="{% url 'creategroupValidate' id=id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="fileInput">Foto</label>
+        <input type="file" name="picture">
+        <textarea class="name" placeholder="Nome: " name="name"></textarea>
+        <textarea class="description" placeholder="Descrição: " name="description"></textarea>
+        <input type="submit" value="Criar">
+    </form>
+
+    <nav class="sidebar">
+        <br />
+        <br />
+        <br />
+        <img src="{{ picture.url }}" alt="Imagem do perfil">
+        <a href="/ponteiro/{{ id }}/profile/">Perfil</a>
+        <a href="/ponteiro/{{ id }}/userSearch/">Buscar usuário</a>
+        <a href="/ponteiro/{{ id }}/home/">Início</a>
+        <a href="/ponteiro/{{ id }}/notifications/">Notificações</a>
+        <a href="/ponteiro/{{ id }}/config/">Configurações</a>
+        <a href="/ponteiro/{{ id }}/logout/">Sair</a>
+    </nav>
+
+    <footer>
+        <hr />
+        <i>PONTEIRO IFSP &copy;</i>
+    </footer>
+
+</body>
+
+</html>

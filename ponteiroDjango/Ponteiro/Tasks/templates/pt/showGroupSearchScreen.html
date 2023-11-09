@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Ponteiro</title>
+    <link rel="stylesheet" href="{% static 'css/' %}{{ theme }}/showGroupSearchStyle.css">
+    </head>
+
+<body>
+
+    <header>
+        <a class="imghome" href="/ponteiro/{{ id }}/home"><img src="{% static 'img/logo.png' %}" alt="Logo do site"></a>
+        <br />
+        <hr />
+    </header>
+            
+    <div>
+        <h1>Grupo</h1>
+        {% if error == '0' %}
+            <b>Você entrou no grupo com sucesso!</b>
+            <br />
+            <br />
+        {% endif %}
+        <img class="banner" src="{{ banner.url }}" alt="Imagem do grupo">
+        <p>Nome: {{ groupName }}</p>
+        <p>Chave: {{ groupKey }} </p>
+        <p>Descrição: {{ groupDescription }}</p>
+        <br />
+        <br />
+        <a href="/ponteiro/{{ id }}/{{ groupKey }}_group/enter/">Entrar</a>
+        <br />
+        <br />
+    </div>
+
+    <nav class="sidebar">
+        <br />
+        <br />
+        <br />
+        <img src="{{ picture.url }}" alt="Imagem do perfil">
+        <a href="/ponteiro/{{ id }}/profile/">Perfil</a>
+        <a href="/ponteiro/{{ id }}/userSearch/">Buscar usuário</a>
+        <a href="/ponteiro/{{ id }}/home/">Início</a>
+        <a href="/ponteiro/{{ id }}/notifications/">Notificações</a>
+        <a href="/ponteiro/{{ id }}/config/">Configurações</a>
+        <a href="/ponteiro/{{ id }}/logout/">Sair</a>
+    </nav>
+
+    <footer>
+        <hr />
+        <i>PONTEIRO IFSP &copy;</i>
+    </footer>
+</body>
+
+</html>
