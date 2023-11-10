@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import User
 from .models import Group
+from .models import groupLinkedList
+from .models import groupListNode
 from django.http import HttpResponse
 from django.shortcuts import redirect
 import os
@@ -75,8 +77,13 @@ def registerValidate(request):
     if len(description) > 800:
         return redirect('/ponteiro/register/?error=8')
 
+    newGroupNode = groupListNode(data = None, next = None)
+    newGroupNode.save()
 
-    newUser = User(picture=picture, name=name, id=id, description=description, password=password, language=language)
+    newGroupList = groupLinkedList(head = newGroupNode)
+    newGroupList.save()
+
+    newUser = User(picture=picture, name=name, id=id, description=description, password=password, language=language, groupsList = newGroupList)
     newUser.save()
 
     return redirect('/ponteiro/register/?error=0')
@@ -106,7 +113,7 @@ def home(request, id):
 
         if not newUser[0].groupsList.isEmpty():
             for groupData in newUser[0].groupsList.traverse():
-                groupsList.append(groupData)
+                if groupData: groupsList.append(groupData.name)
             groups = True
         else: groupsList = "Você ainda não está em nenhum grupo!"
 
@@ -361,17 +368,15 @@ def createGroupValidate(request, id):
             return redirect(f'/ponteiro/{id}/home/createGroup/?error=6')
 
         newGroup = Group(picture=picture, name=name, id=groupID, description=description)
-        user_instance.groupsList.push(groupID)
-        newGroup.adminList.push(id)
-        newGroup.membersList.insert(id)
         newGroup.save()
-        user_instance.save()
+        
+        user_instance.groupsList.push(newGroup)
 
         language = user_instance.language
         pictureShow = user_instance.picture
         theme = user_instance.theme
 
-        return render(request, f'{ language }/createGroupScreen.html', {'picture' : pictureShow, 'id' : id, 'theme' : theme})
+        return redirect(f'/ponteiro/{ id }/home/createGroup/?error=0')
     
     else:
         request.session.flush()

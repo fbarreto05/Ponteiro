@@ -6,25 +6,22 @@ def user_profile_image_path(instance, filename):
 def group_image_path(instance, filename):
     return f'groups/{instance.id}/bannerPicture/{filename}'
 
-class LinkedList():
-        class __node():
-            def __init__(self, data, next=None):
-                self.data = data
-                self.next = next
+class groupListNode(models.Model):
+        data = models.OneToOneField('Group', on_delete=models.CASCADE, null=True, blank=True)
+        next = models.OneToOneField('groupListNode', on_delete=models.CASCADE, null=True, blank=True)
 
-        def __init__(self):
-            self.head = None
-            self.last = None
+class groupLinkedList(models.Model):
+        head = models.OneToOneField('groupListNode', on_delete=models.CASCADE, null=True, blank=True)
 
         def isEmpty(self):
-            if self.head == None:
+            if self.head.data == None:
                 return True
             else: return False
 
         def __find(self, goal):
             current = self.head
             parent = self
-            while current and goal != current.data:
+            while current and goal != current.data.id:
                 parent = current
                 current = current.next
             return parent, current
@@ -42,9 +39,13 @@ class LinkedList():
             else: return self.__delete(goal)
 
         def push(self, new_data):
-            new_node = self.__node(new_data)
-            new_node.next = self.head
-            self.head = new_node
+                new_node = groupListNode(data=new_data, next=self.head)
+                new_node.save()
+                print(self.head)
+                self.head = new_node
+                print (self.head)
+                self.save()
+                
 
         def __traverse(self, node):
             if node is None:
@@ -57,14 +58,14 @@ class LinkedList():
             if self.isEmpty(): print("Empty list")
             else: return self.__traverse(self.head)
 
-        
-class binarySearchTree():
-        class __node():
-            def __init__(self, data, left=None, right=None):
-                self.data = data
-                self.left = left
-                self.right = right
+    
+class userTreeNode():
+        def __init__(self, data, left=None, right=None):
+            self.data = data
+            self.left = left
+            self.right = right
 
+class userBinarySearchTree():
         def __init__(self):
             self.__root = None
 
@@ -92,11 +93,11 @@ class binarySearchTree():
                 node.data = data
                 return False
             if parent is self:
-                self.__root = self.__node(data)
+                self.__root = self.userTreeNode(data)
             elif data < parent.data:
-                parent.left = self.__node(data)
+                parent.left = self.userTreeNode(data)
             else:
-                parent.right = self.__node(data)
+                parent.right = self.userTreeNode(data)
             return True
         
         def traverse(self):
@@ -179,7 +180,7 @@ class User(models.Model):
     theme = models.TextField(max_length=5, default = 'light')
     language = models.TextField(max_length=2, default = 'pt')
 
-    groupsList = LinkedList()
+    groupsList = models.OneToOneField('groupLinkedList', on_delete=models.CASCADE, null=True, blank=True)
 
 
 class Group(models.Model):
@@ -188,8 +189,8 @@ class Group(models.Model):
     id = models.TextField(max_length=20, default = 'id', primary_key=True)
     description = models.TextField(max_length=800, default = 'description')
 
-    adminList = LinkedList()
-    membersList = binarySearchTree()
+    adminList = userBinarySearchTree()
+    membersList = userBinarySearchTree()
 
  
 # Create your models here.
