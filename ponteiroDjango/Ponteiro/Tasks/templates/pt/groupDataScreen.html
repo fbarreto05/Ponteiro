@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Ponteiro</title>
+    <link rel="stylesheet" href="{% static 'css/' %}{{ theme }}/groupDataStyle.css">
+</head>
+
+<body>
+
+<header>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>   
+    <br/>
+    <h1>Dados do grupo: </h1>
+</header>
+
+<nav class="sidebar">
+    <br />
+    <br />
+    <br />
+    <img src="{{ picture.url }}" alt="Imagem do perfil">
+    <a href="/ponteiro/{{ id }}/profile/">Perfil</a>
+    <a href="/ponteiro/{{ id }}/userSearch/">Buscar usuário</a>
+    <a href="/ponteiro/{{ id }}/home/">Início</a>
+    <a href="/ponteiro/{{ id }}/notifications/">Notificações</a>
+    <a href="/ponteiro/{{ id }}/config/">Configurações</a>
+    <a href="/ponteiro/{{ id }}/logout/">Sair</a>
+</nav>
+
+<nav class="topbar">
+    <a href="/ponteiro/{{ id }}/group/{{ groupID }}/">Registrador</a>
+    <a href="">Chat</a>
+    <a href="">Mural</a>
+    <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/">Dados</a>
+    <a href="">Configurações</a>
+</nav>
+
+<main>
+    {% if error == '0' %}
+        <p>O usuário foi removido com sucesso!.</p>
+    {% endif %}
+    {% if error == '3' %}
+        <p>Você não tem as permissões de administrador.</p>
+    {% endif %}
+    <img class="groupPic" src="{{ banner.url }}" alt="Group image">
+    <p>Nome: {{ groupName }}</p>
+    <p>Chave: {{ groupID }}</p>
+    <p>Descrição: {{ groupDescription }}</p>
+    <br/>
+
+    <div class="lists">
+        <div class="userList">
+        <p>Lista de usuários: </p>
+            {% for userName, userID in memberList %}
+                {% if userID == id %}
+                    <p>{{ userName }}   <a href="/ponteiro/{{ id }}/profile/">{{ userID }}</a>
+                    </p>
+                {% else %}
+                    <p>{{ userName }} <a href="/ponteiro/{{ id }}/{{ userID }}_profile/">{{ userID }}</a>
+                    {% if isAdm %}
+                        <br/>
+                        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/remove/?removeId={{ userName }}" style="font-size: small; margin-left: 10px;">Remover</a>
+                        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/promote/?promoteId={{ userName }}" style="font-size: small; margin-left: 10px;">Promover</a>
+                    {% endif %}
+                    </p>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="adminList">
+        <p>Lista de administradores: </p>
+            {% for adminName, adminID in adminList %}
+                {% if adminID == id %}
+                    <p>{{ adminName }} <a href="/ponteiro/{{ id }}/profile/">{{ adminID }}</a></p>
+                {% else %}
+                    <p>{{ adminName }} <a href="/ponteiro/{{ id }}/{{ userID }}_profile/">{{ adminID }}</a>
+                    {% if isAdm %}
+                        <br/>
+                        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/remove/?removeId={{ adminName }}" style="font-size: small; margin-left: 10px;">Remover</a>
+                        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/demote/?demoteId={{ adminName }}" style="font-size: small; margin-left: 10px;">Rebaixar</a>
+                    {% endif %}
+                    </p>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/remove/?removeId={{ id }}">Sair</a>
+</main>
+
+<footer>
+    <hr />
+    <i>PONTEIRO IFSP &copy;</i>
+</footer>
+
+</body>
+
+</html>

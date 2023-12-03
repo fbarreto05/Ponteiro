@@ -7,21 +7,19 @@ def group_image_path(instance, filename):
     return f'groups/{instance.id}/bannerPicture/{filename}'
 
 class groupListNode(models.Model):
-        data = models.OneToOneField('Group', on_delete=models.CASCADE, null=True, blank=True)
-        next = models.OneToOneField('groupListNode', on_delete=models.CASCADE, null=True, blank=True)
+        data = models.ForeignKey('Group', on_delete=models.CASCADE, null=True, blank=True)
+        next = models.ForeignKey('groupListNode', on_delete=models.CASCADE, null=True, blank=True)
 
 class groupLinkedList(models.Model):
-        head = models.OneToOneField('groupListNode', on_delete=models.CASCADE, null=True, blank=True)
+        head = models.ForeignKey('groupListNode', on_delete=models.CASCADE, null=True, blank=True)
 
         def isEmpty(self):
-            if self.head.data == None:
-                return True
-            else: return False
+            return self.head.data is None
 
         def __find(self, goal):
             current = self.head
             parent = self
-            while current and goal != current.data.id:
+            while (current and goal != current.data.id):
                 parent = current
                 current = current.next
             return parent, current
@@ -32,19 +30,32 @@ class groupLinkedList(models.Model):
 
         def __delete(self, goal):
             parent, node = self.search(goal)
-            parent.next = node.next
+            if parent is self:
+                if node.next is None: 
+                    self.head.data = None
+                    self.head.save()
+                else:
+                    self.head = node.next
+                    self.save()
+            else:
+                parent.next = node.next
+                parent.save()
 
         def delete(self, goal):
             if self.isEmpty(): print("Empty list")
             else: return self.__delete(goal)
 
         def push(self, new_data):
+            if self.isEmpty():
+                self.head.data = new_data
+                self.head.save()
+            else:
                 new_node = groupListNode(data=new_data, next=self.head)
                 new_node.save()
                 print(self.head)
                 self.head = new_node
                 print (self.head)
-                self.save()
+            self.save()
                 
 
         def __traverse(self, node):
@@ -59,50 +70,51 @@ class groupLinkedList(models.Model):
             else: return self.__traverse(self.head)
 
     
-class userTreeNode():
-        def __init__(self, data, left=None, right=None):
-            self.data = data
-            self.left = left
-            self.right = right
+class userTreeNode(models.Model):
+        data = models.ForeignKey('User', on_delete=models.CASCADE, null=True, blank=True, related_name='dataTreeNode')
+        left = models.ForeignKey('userTreeNode', on_delete=models.CASCADE, null=True, blank=True, related_name='leftData')
+        right = models.ForeignKey('userTreeNode', on_delete=models.CASCADE, null=True, blank=True, related_name='rightData')
 
-class userBinarySearchTree():
-        def __init__(self):
-            self.__root = None
+class userBinarySearchTree(models.Model):
+        root = models.ForeignKey('userTreeNode', on_delete=models.CASCADE, null=True, blank=True, related_name='userTree')
 
         def isEmpty(self):
-            return self.__root is None
+            return self.root.data is None
         
         def __find(self, goal):
-            current = self.__root
+            current = self.root
             parent = self
 
             while (current and goal != current.data):
                 parent = current
-                current = (current.left if goal < current.data else current.right)
-            return (current, parent)
+                current = (current.left if goal.name < current.data.name else current.right)
+            return parent, current
         
         def search(self, goal):
             if self.isEmpty(): print("Empty tree")
-            else:
-                node, parent = self.__find(goal)
-                return node.data if node else None
+            else: return self.__find(goal)
             
         def insert(self, data):
-            node, parent = self.__find(data)
-            if node:
-                node.data = data
-                return False
-            if parent is self:
-                self.__root = self.userTreeNode(data)
-            elif data < parent.data:
-                parent.left = self.userTreeNode(data)
+            if self.isEmpty():
+                self.root.data = data
+                self.root.save()
             else:
-                parent.right = self.userTreeNode(data)
-            return True
+                parent, node = self.__find(data)
+                if node:
+                    node.data = data
+                    return False
+                elif data.name < parent.data.name:
+                    parent.left = userTreeNode(data=data, left = None, right = None)
+                    parent.left.save()
+                else:
+                    parent.right = userTreeNode(data=data, left = None, right = None)
+                    parent.right.save()
+                parent.save()
+            self.save()    
         
         def traverse(self):
             if self.isEmpty(): print("Empty tree")
-            else: return self.__traverse(self.__root)
+            else: return self.__traverse(self.root)
 
         def __traverse(self, node):
             if node is None:
@@ -136,7 +148,7 @@ class userBinarySearchTree():
             
                 else:
                     if parent is self:
-                        self.__root = node.left
+                        self.root = node.left
 
                     elif parent.left is node:
                         parent.left = node.left
@@ -146,7 +158,11 @@ class userBinarySearchTree():
             
             else:
                 if parent is self:
-                    self.__root = node.right
+                    if node.right: 
+                        self.root = node.right
+                    else:
+                        self.root.data = None
+                        self.root.save()
                 
                 elif parent.left is node:
                     parent.left = node.right
@@ -154,11 +170,12 @@ class userBinarySearchTree():
                 else:
                     parent.right = node.right
 
+            parent.save()
             print("User deleted")
             return deleted
         
         def delete(self, goal):
-            node, parent = self.__find(goal)
+            parent, node = self.__find(goal)
 
             if node is not None:
                 return self.__delete(parent, node)
@@ -180,7 +197,7 @@ class User(models.Model):
     theme = models.TextField(max_length=5, default = 'light')
     language = models.TextField(max_length=2, default = 'pt')
 
-    groupsList = models.OneToOneField('groupLinkedList', on_delete=models.CASCADE, null=True, blank=True)
+    groupsList = models.ForeignKey('groupLinkedList', on_delete=models.CASCADE, null=True, blank=True)
 
 
 class Group(models.Model):
@@ -189,8 +206,8 @@ class Group(models.Model):
     id = models.TextField(max_length=20, default = 'id', primary_key=True)
     description = models.TextField(max_length=800, default = 'description')
 
-    adminList = userBinarySearchTree()
-    membersList = userBinarySearchTree()
+    adminList = models.ForeignKey('userBinarySearchTree', on_delete=models.CASCADE, null=True, blank=True, related_name='admins')
+    membersList = models.ForeignKey('userBinarySearchTree', on_delete=models.CASCADE, null=True, blank=True, related_name='members')
 
  
 # Create your models here.

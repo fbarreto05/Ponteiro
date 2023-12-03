@@ -3,6 +3,8 @@ from .models import User
 from .models import Group
 from .models import groupLinkedList
 from .models import groupListNode
+from .models import userTreeNode
+from .models import userBinarySearchTree
 from django.http import HttpResponse
 from django.shortcuts import redirect
 import os
@@ -60,7 +62,7 @@ def registerValidate(request):
     
     newUser = User.objects.filter(id = id)
     if len(newUser) > 0:
-        return redirect('/ponteiro/register/?error=1')
+        return redirect('/ponteiro/register/?error=2')
 
     if id.strip() == '' or password.strip() == '' or name.strip() == '':
         return redirect('/ponteiro/register/?error=3')
@@ -108,19 +110,22 @@ def home(request, id):
     if request.session.get('User') == id:
         newUser = User.objects.filter(id = id)
 
-        groupsList = []
+        groupList = []
+        idList = []
         groups = False
-
+   
         if not newUser[0].groupsList.isEmpty():
             for groupData in newUser[0].groupsList.traverse():
-                if groupData: groupsList.append(groupData.name)
+                if groupData: groupList.append(groupData.name), idList.append(groupData.id)
             groups = True
-        else: groupsList = "Você ainda não está em nenhum grupo!"
+            groupList = zip(groupList, idList)
+        else: groupList = "Você ainda não está em nenhum grupo!"
 
         theme = newUser[0].theme
         language = newUser[0].language
         pictureShow = newUser[0].picture
-        return render(request, f'{ language }/homeScreen.html', {'picture' : pictureShow, 'id' : id, 'theme' : theme, 'groupList' : groupsList, 'groups' : groups})
+        error = request.GET.get('error')
+        return render(request, f'{ language }/homeScreen.html', {'picture' : pictureShow, 'id' : id, 'theme' : theme, 'groupList' : groupList, 'groups' : groups, 'error' : error})
     else:
         request.session.flush()
         return redirect('/ponteiro/login/?error=3')
@@ -367,14 +372,22 @@ def createGroupValidate(request, id):
         elif len(description.strip()) > 800:
             return redirect(f'/ponteiro/{id}/home/createGroup/?error=6')
 
-        newGroup = Group(picture=picture, name=name, id=groupID, description=description)
-        newGroup.save()
-        
-        user_instance.groupsList.push(newGroup)
+        admListNode = userTreeNode(data=None, left=None, right=None)
+        memberListNode = userTreeNode(data=None, left=None, right=None)
+        admListNode.save()
+        memberListNode.save()
 
-        language = user_instance.language
-        pictureShow = user_instance.picture
-        theme = user_instance.theme
+        admList = userBinarySearchTree(root = admListNode)
+        memberList = userBinarySearchTree(root = memberListNode)
+        admList.save()
+        memberList.save()
+
+
+        newGroup = Group(picture=picture, name=name, id=groupID, description=description, adminList=admList, membersList=memberList)
+        newGroup.save()
+
+        user_instance.groupsList.push(newGroup)
+        newGroup.adminList.insert(user_instance)
 
         return redirect(f'/ponteiro/{ id }/home/createGroup/?error=0')
     
@@ -437,11 +450,170 @@ def enterGroup(request, id, groupID):
         print(groupID)
         user_instance = User.objects.get(id=id)
         group_instance = Group.objects.get(id=groupID)
-        user_instance.groupsList.push(groupID)
-        group_instance.membersList.insert(id)
-        user_instance.save()
-        group_instance.save()
+
+        user_instance.groupsList.push(group_instance)
+
+        group_instance.membersList.insert(user_instance)
         return redirect(f'/ponteiro/{ id }/{ groupID }_group/?error=0')
+    else:
+        request.session.flush()
+        return redirect('/ponteiro/login/?error=3')
+    
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def groupHome(request, id, groupID):
+    if request.session.get('User') == id:
+        user_instance = User.objects.get(id=id)
+        group_instance = Group.objects.get(id=groupID)
+
+        if user_instance.groupsList.isEmpty():
+            return redirect(f'/ponteiro/{ id }/home/?error=1')
+        _, current = user_instance.groupsList.search(group_instance.id)
+
+        if current == None:
+            return redirect(f'/ponteiro/{ id }/home/?error=1')
+        
+        language = user_instance.language
+        picture = user_instance.picture
+        groupName = group_instance.name
+        groupID = group_instance.id
+        theme = user_instance.theme
+
+        return render(request, f'{ language }/groupHomeScreen.html', {'picture' : picture, 'groupName' : groupName, 'groupID' : groupID, 'id' : id, 'theme' : theme, 'language' : language})
+    
+    else:
+        request.session.flush()
+        return redirect('/ponteiro/login/?error=3')
+    
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def groupData(request, id, groupID):
+    if request.session.get('User') == id:
+        user_instance = User.objects.get(id=id)
+        group_instance = Group.objects.get(id=groupID)
+
+        if user_instance.groupsList.isEmpty():
+            return redirect(f'/ponteiro/{ id }/home/?error=1')
+        _, current = user_instance.groupsList.search(group_instance.id)
+
+        if current == None:
+            return redirect(f'/ponteiro/{ id }/home/?error=1')
+
+        memberList = []
+        idList = []
+        adminList = []
+        admIdList = []
+        isAdmin = False
+
+        if not group_instance.membersList.isEmpty():
+            for memberData in group_instance.membersList.traverse():
+                if memberData: memberList.append(memberData.name), idList.append(memberData.id)
+            memberList = zip(memberList, idList)
+
+        for adminData in group_instance.adminList.traverse():
+            if adminData: adminList.append(adminData.name), admIdList.append(adminData.id)
+        if user_instance.id in admIdList: isAdmin = True
+        adminList = zip(adminList, admIdList)
+
+        language = user_instance.language
+        picture = user_instance.picture
+        groupPicture = group_instance.picture
+        groupName = group_instance.name
+        groupID = group_instance.id
+        theme = user_instance.theme
+        groupDescription = group_instance.description
+        error = request.GET.get('error')
+
+        return render(request, f'{ language }/groupDataScreen.html', {'picture' : picture, 'banner' : groupPicture, 'groupName' : groupName, 'groupID' : groupID, 'groupDescription' : groupDescription, 'id' : id, 'theme' : theme, 'language' : language, 'memberList' : memberList, 'adminList' : adminList, 'isAdm' : isAdmin, 'error' : error})
+    else:
+        request.session.flush()
+        return redirect('/ponteiro/login/?error=3')
+    
+def groupRemove(request, id, groupID):
+    if request.session.get('User') == id:
+        user_instance = User.objects.get(id=id)
+        group_instance = Group.objects.get(id=groupID)
+
+        if user_instance.groupsList.isEmpty():
+            return redirect(f'/ponteiro/{ id }/home/?error=1')
+        _, current = user_instance.groupsList.search(group_instance.id)
+
+        if current == None:
+            return redirect(f'/ponteiro/{ id }/home/?error=1')
+        
+        _, current = group_instance.adminList.search(user_instance)
+        if current == None:
+            return redirect(f'/ponteiro/{ id }/group/{ groupID }/data/?error=3')
+        
+        toRemove = User.objects.get(id=request.GET.get('removeId'))
+
+        if not group_instance.membersList.isEmpty():
+            _, current = group_instance.membersList.search(toRemove)
+            if current: group_instance.membersList.delete(toRemove)
+
+        _, current = group_instance.adminList.search(toRemove)
+        if current: group_instance.adminList.delete(toRemove)
+
+        toRemove.groupsList.delete(group_instance.id)
+
+        if toRemove.id == id:
+            return redirect(f'/ponteiro/{ id }/home/?error=0')
+        return redirect(f'/ponteiro/{ id }/group/{ groupID }/data/?error=0')
+    else:
+        request.session.flush()
+        return redirect('/ponteiro/login/?error=3')
+    
+def groupPromote(request, id, groupID):
+    user_instance = User.objects.get(id=id)
+    group_instance = Group.objects.get(id=groupID)
+    
+    if request.session.get('User') == id:
+        if user_instance.groupsList.isEmpty():
+            return redirect(f'/ponteiro/{ id }/home/?error=1')
+        _, current = user_instance.groupsList.search(group_instance.id)
+
+        if current == None:
+            return redirect(f'/ponteiro/{ id }/home/?error=1')
+        
+        _, current = group_instance.adminList.search(user_instance)
+        if current == None:
+            return redirect(f'/ponteiro/{ id }/group/{ groupID }/data/?error=3')
+        
+        toPromote = User.objects.get(id=request.GET.get('promoteId'))
+
+        _, current = group_instance.membersList.search(toPromote)
+        if current: 
+            group_instance.adminList.insert(toPromote)
+            group_instance.membersList.delete(toPromote)
+            return redirect(f'/ponteiro/{ id }/group/{ groupID }/data/?error=1')
+
+    else:
+        request.session.flush()
+        return redirect('/ponteiro/login/?error=3')
+    
+def groupDemote(request, id, groupID):
+    user_instance = User.objects.get(id=id)
+    group_instance = Group.objects.get(id=groupID)
+    
+    if request.session.get('User') == id:
+        if user_instance.groupsList.isEmpty():
+            return redirect(f'/ponteiro/{ id }/home/?error=1')
+        _, current = user_instance.groupsList.search(group_instance.id)
+
+        if current == None:
+            return redirect(f'/ponteiro/{ id }/home/?error=1')
+        
+        _, current = group_instance.adminList.search(user_instance)
+        if current == None:
+            return redirect(f'/ponteiro/{ id }/group/{ groupID }/data/?error=3')
+        
+        toDemote = User.objects.get(id=request.GET.get('demoteId'))
+
+        _, current = group_instance.adminList.search(toDemote)
+        if current: 
+            group_instance.membersList.insert(toDemote)
+            group_instance.adminList.delete(toDemote)
+            return redirect(f'/ponteiro/{ id }/group/{ groupID }/data/?error=1')
+        
+        else: return redirect(f'/ponteiro/{ id }/group/{ groupID }/data/?error=4')
     else:
         request.session.flush()
         return redirect('/ponteiro/login/?error=3')

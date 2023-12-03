@@ -32,20 +32,29 @@
 </nav>
 
 <main>
+    {% if error == '0' %}
+        <p>Você saiu do grupo com sucesso!</p>
+    {% endif %}
+    {% if error == '1' %}
+        <p>Entre no grupo antes de tentar acessá-lo!</p>
+    {% endif %}
     <hr />
     <a href="/ponteiro/{{ id }}/home/createGroup/">Criar grupo</a>
     <a href="/ponteiro/{{ id }}/home/groupSearch/">Buscar grupo</a>
     <br />
     <br />
     <br />
-    <h1>Grupos: </h1>
-    {% if groups %}
-        {% for group in groupList %}
-            <p>{{ group }}</p>
-        {% endfor %}
-    {% else %}
-        <p>{{ groupList }}</p>
-    {% endif %}
+    <div class="groups">
+        <h1>Grupos: </h1>
+        </br>
+        {% if groups %}
+            {% for gpName, gpID in groupList %}
+                <a href="/ponteiro/{{ id }}/group/{{ gpID }}">{{ gpName }}</a><br/><br/>
+            {% endfor %}
+        {% else %}
+            <p>{{ groupList }}</p>
+        {% endif %}
+    </div>
 </main>
 
 <footer>

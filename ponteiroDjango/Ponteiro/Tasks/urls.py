@@ -16,11 +16,16 @@ urlpatterns = [
     path('<str:id>/<str:groupID>_group/', views.showGroup, name='showGroup'),
     path('<str:id>/<str:groupID>_group/enter/', views.enterGroup, name='enterGroup'),
 
+    path('<str:id>/group/<str:groupID>/', views.groupHome, name='groupHome'),
+    path('<str:id>/group/<str:groupID>/data/', views.groupData, name='groupData'),
+    path('<str:id>/group/<str:groupID>/data/remove/', views.groupRemove, name='groupRemove'),
+    path('<str:id>/group/<str:groupID>/data/promote/', views.groupPromote, name='groupPromote'),
+    path('<str:id>/group/<str:groupID>/data/demote/', views.groupDemote, name='groupDemote'),
 
     path('<str:id>/profile/', views.profile, name='profile'),
     path('<str:id>/profile/edit/', views.profileedit, name='profileedit'),
     path('<str:id>/profile/editValidate/', views.profileeditValidate, name='profileeditValidate'),
-    path('<str:id>/profile/delete', views.profiledelete, name='profiledelete'),
+    path('<str:id>/profile/delete/', views.profiledelete, name='profiledelete'),
 
     path('<str:id>/userSearch/', views.userSearch, name='userSearch'),
     path('<str:id>/searchValidate/', views.searchValidate, name='searchValidate'),
