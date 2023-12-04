@@ -20,7 +20,7 @@ urlpatterns = [
     path('<str:id>/group/<str:groupID>/data/', views.groupData, name='groupData'),
     path('<str:id>/group/<str:groupID>/data/remove/', views.groupRemove, name='groupRemove'),
     path('<str:id>/group/<str:groupID>/data/promote/', views.groupPromote, name='groupPromote'),
-    path('<str:id>/group/<str:groupID>/data/demote/', views.groupDemote, name='groupDemote'),
+    path('<str:id>/group/<str:groupID>/data/erase/', views.groupErase, name='groupErase'),
 
     path('<str:id>/profile/', views.profile, name='profile'),
     path('<str:id>/profile/edit/', views.profileedit, name='profileedit'),

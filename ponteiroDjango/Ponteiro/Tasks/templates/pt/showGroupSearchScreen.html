@@ -26,6 +26,11 @@
             <br />
             <br />
         {% endif %}
+        {% if error == '1' %}
+            <b>Você já está nesse grupo!</b>
+            <br />
+            <br />
+        {% endif %}
         <img class="banner" src="{{ banner.url }}" alt="Imagem do grupo">
         <p>Nome: {{ groupName }}</p>
         <p>Chave: {{ groupKey }} </p>

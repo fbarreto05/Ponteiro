@@ -38,6 +38,9 @@
     {% if error == '1' %}
         <p>Entre no grupo antes de tentar acessá-lo!</p>
     {% endif %}
+    {% if error == '2' %}
+        <p>Grupo apagado com sucesso!</p>
+    {% endif %}
     <hr />
     <a href="/ponteiro/{{ id }}/home/createGroup/">Criar grupo</a>
     <a href="/ponteiro/{{ id }}/home/groupSearch/">Buscar grupo</a>
@@ -48,7 +51,9 @@
         <h1>Grupos: </h1>
         </br>
         {% if groups %}
-            {% for gpName, gpID in groupList %}
+            {% for gpPic, gpName, gpID in groupList reversed%}
+                <img src="{{ gpPic.url }}" alt="Imagem do grupo">
+                </br>
                 <a href="/ponteiro/{{ id }}/group/{{ gpID }}">{{ gpName }}</a><br/><br/>
             {% endfor %}
         {% else %}

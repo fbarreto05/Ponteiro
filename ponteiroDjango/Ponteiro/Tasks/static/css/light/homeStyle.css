@@ -30,6 +30,15 @@ p
     margin-left: 150px;
 }
 
+main img
+{
+    height: 150px;
+    width: 200;
+    border: 2px solid orangered;
+    border-radius: 2px;
+    margin-left: 150px;
+}
+
 main h1
 {
     margin-left: 150px;

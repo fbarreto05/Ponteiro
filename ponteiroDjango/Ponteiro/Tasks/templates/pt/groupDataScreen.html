@@ -60,6 +60,13 @@
     <p>Descrição: {{ groupDescription }}</p>
     <br/>
 
+    {% if isAdm %}                   
+                        <a href="">Editar</a>
+                        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/erase/">Apagar</a>
+                        <br/>
+                        <br/>
+    {% endif %}
+
     <div class="lists">
         <div class="userList">
         <p>Lista de usuários: </p>
@@ -96,6 +103,7 @@
             {% endfor %}
         </div>
     </div>
+    <br/>
     <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/remove/?removeId={{ id }}">Sair</a>
 </main>
 

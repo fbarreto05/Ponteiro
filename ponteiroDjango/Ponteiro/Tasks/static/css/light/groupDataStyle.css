@@ -28,10 +28,10 @@ p
     color: orangered;
     font-size: 25px;
     border: 1px solid orangered;
-    max-width: 600px;
+    max-width: 1000px;
     word-wrap: break-word;
     margin: 0 auto;
-    margin-left: 700px;
+    margin-left: 500px;
 }
 
 main h1
@@ -43,7 +43,6 @@ main p
 {
     font-size: 25px;
 }
-
 
 main a
 {
@@ -103,17 +102,18 @@ main a:hover
 .lists
 {
     display: flex;
-
+    text-align: center;
+    justify-content: center;
 }
 
 .userList p
 {
-    margin-left: 400px;
+    margin-left: 150px;
 }
 
 .adminList p
 {
-    margin-left: 43px;
+    margin-left: 50px;
 }
 
 .sidebar img

@@ -52,12 +52,9 @@ class groupLinkedList(models.Model):
             else:
                 new_node = groupListNode(data=new_data, next=self.head)
                 new_node.save()
-                print(self.head)
                 self.head = new_node
-                print (self.head)
             self.save()
                 
-
         def __traverse(self, node):
             if node is None:
                 return
