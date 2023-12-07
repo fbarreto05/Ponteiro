@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Group, groupListNode, groupLinkedList, userTreeNode, userBinarySearchTree
+from .models import User, Group, groupListNode, groupLinkedList, userTreeNode, userBinarySearchTree, scheduleList, scheduleListNode
 
 @admin.register(User)
 class userAdmin(admin.ModelAdmin):
@@ -15,11 +15,19 @@ class userAdmin(admin.ModelAdmin):
 
 @admin.register(userTreeNode)
 class userAdmin(admin.ModelAdmin):
-    readonly_fields = ('data', 'left', 'right')
+    readonly_fields = ('data', 'state', 'left', 'right')
 
 @admin.register(userBinarySearchTree)
 class userAdmin(admin.ModelAdmin):
     readonly_fields = ('root', )
+
+@admin.register(scheduleListNode)
+class userAdmin(admin.ModelAdmin):
+    readonly_fields = ('previous', 'data', 'next', )
+
+@admin.register(scheduleList)
+class userAdmin(admin.ModelAdmin):
+    readonly_fields = ('head', )
     
 @admin.register(Group)
 class userAdmin(admin.ModelAdmin):

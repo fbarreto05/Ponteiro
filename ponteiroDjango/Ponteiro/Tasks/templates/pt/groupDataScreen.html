@@ -49,7 +49,10 @@
 
 <main>
     {% if error == '0' %}
-        <p>O usuário foi removido com sucesso!.</p>
+        <p>O usuário foi removido com sucesso!</p>
+    {% endif %}
+    {% if error == '2' %}
+        <p>Mudanças efetuadas com sucesso!</p>
     {% endif %}
     {% if error == '3' %}
         <p>Você não tem as permissões de administrador.</p>
@@ -61,7 +64,7 @@
     <br/>
 
     {% if isAdm %}                   
-                        <a href="">Editar</a>
+                        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/edit/">Editar</a>
                         <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/erase/">Apagar</a>
                         <br/>
                         <br/>

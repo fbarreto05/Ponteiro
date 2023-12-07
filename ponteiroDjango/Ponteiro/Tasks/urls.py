@@ -17,10 +17,16 @@ urlpatterns = [
     path('<str:id>/<str:groupID>_group/enter/', views.enterGroup, name='enterGroup'),
 
     path('<str:id>/group/<str:groupID>/', views.groupHome, name='groupHome'),
+    path('<str:id>/group/<str:groupID>/clickRegistrator', views.clickRegistrator, name='clickRegistrator'),
+    path('<str:id>/group/<str:groupID>/generateReceipt', views.generateReceipt, name='generateReceipt'),
+    path('<str:id>/group/<str:groupID>/generateReport', views.generateReport, name='genrateReport'),
     path('<str:id>/group/<str:groupID>/data/', views.groupData, name='groupData'),
     path('<str:id>/group/<str:groupID>/data/remove/', views.groupRemove, name='groupRemove'),
     path('<str:id>/group/<str:groupID>/data/promote/', views.groupPromote, name='groupPromote'),
+    path('<str:id>/group/<str:groupID>/data/demote/', views.groupDemote, name='groupDemote'),
     path('<str:id>/group/<str:groupID>/data/erase/', views.groupErase, name='groupErase'),
+    path('<str:id>/group/<str:groupID>/data/edit/', views.groupEdit, name='groupEdit'),
+    path('<str:id>/group/<str:groupID>/data/editValidate/', views.groupEditValidate, name='groupeditValidate'),
 
     path('<str:id>/profile/', views.profile, name='profile'),
     path('<str:id>/profile/edit/', views.profileedit, name='profileedit'),

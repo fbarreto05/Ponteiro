@@ -126,6 +126,16 @@ hr
     border-color: orangered;
 }
 
+button {
+    background-color: orangered;
+    height: 50px;
+    width: 12%;
+    box-sizing: border-box;
+    color: white;
+    margin-left: 900px;
+    display:block;
+}
+
 i 
 {
     margin-left: 150px;

@@ -9,6 +9,15 @@
     <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
     <title>Ponteiro</title>
     <link rel="stylesheet" href="{% static 'css/' %}{{ theme }}/groupHomeStyle.css">
+
+    <style>
+        #clock {
+            font-size: 24px;
+            font-family: 'Arial', sans-serif;
+            margin-left: 150px;
+            margin-bottom: 25px;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,9 +32,45 @@
     <br/>
     <br/>   
     <br/>
-    <h1>Bem-vindo ao grupo {{ groupName }}</h1>
+    <h1>Bem-vindo ao grupo {{ groupName }}.</h1>
     <hr/>
 </header>
+
+<div id="clock">
+
+    <script>
+        function updateClock() {
+            var now = new Date();
+
+            var day = now.getDate();
+            var month = now.getMonth() + 1;
+            var year = now.getFullYear();
+
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            day = day < 10 ? '0' + day : day;
+            month = month < 10 ? '0' + month : month;
+
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            var currentDate = day + '/' + month + '/' + year;
+            var currentTime = hours + ':' + minutes + ':' + seconds;
+
+            document.getElementById('clock').innerHTML = currentDate + '<br>' + currentTime;
+
+        }
+
+        setInterval(updateClock, 1000);
+
+        updateClock();
+    </script>
+
+</div>
+
 
 <nav class="sidebar">
     <br />
@@ -49,7 +94,51 @@
 </nav>
 
 <main>
-    <p>Aqui vai ficar o registrador!</p>
+    <form id="actionForm" action="{% url 'clickRegistrator' id=id groupID=groupID%}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}  
+        <input type="hidden" name="value" id="value" value="">
+        <input type="hidden" name="timestamp" id="timestamp" value="">  
+        {% if state == '1' %}
+            <button type="submit" onclick="performAction(0)">Encerrar</button>
+        {% else %}
+            <button type="submit" onclick="performAction(1)">Iniciar</button>
+        {% endif %}
+    </form>
+
+    <a href="/ponteiro/{{ id }}/group/{{ groupID }}/generateReceipt"><button>Emitir comprovante</button></a>
+    {% if isADM %}
+        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/generateReport"><button>Gerar relatório</button></a>
+    {% endif %}
+
+    <script>
+        function performAction(actionValue) 
+        {
+            document.getElementById('value').value = actionValue;
+
+            var now = new Date();
+
+            var day = now.getDate();
+            var month = now.getMonth() + 1;
+            var year = now.getFullYear();
+
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            day = day < 10 ? '0' + day : day;
+            month = month < 10 ? '0' + month : month;
+
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            var timestamp = day + '/' + month + '/' + year + " - " + hours + ':' + minutes + ':' + seconds;
+
+            document.getElementById('timestamp').value = timestamp;
+
+            document.getElementById('actionForm').submit();
+        }
+    </script>
 </main>
 
 <footer>

@@ -66,9 +66,53 @@ class groupLinkedList(models.Model):
             if self.isEmpty(): print("Empty list")
             else: return self.__traverse(self.head)
 
-    
+class scheduleListNode(models.Model):
+        previous = models.ForeignKey('scheduleListNode', on_delete=models.CASCADE, null=True, blank=True, related_name='previous_node')
+        data = models.TextField(max_length=50, null=True, blank=True)
+        next = models.ForeignKey('scheduleListNode', on_delete=models.CASCADE, null=True, blank=True, related_name='next_node')
+
+class scheduleList(models.Model):
+        head = models.ForeignKey('scheduleListNode', on_delete=models.CASCADE, null=True, blank=True)
+
+        def isEmpty(self):
+            return self.head.data is None
+
+        def append(self, new_data):
+            if self.isEmpty():
+                self.head.data = new_data
+                self.head.save()
+            else:
+                parent = self
+                current = self.head
+                while current:
+                    parent = current
+                    current = current.next
+                new_node = scheduleListNode(previous=parent, data=new_data, next=None)
+                new_node.save()
+                parent.next = new_node
+                parent.save()
+            self.save()
+
+        def clear(self):
+            self.head.data = None
+            self.next = None
+                
+        def __traverse(self, node):
+            if node is None:
+                return
+            for nextData in self.__traverse(node.next):
+                yield(nextData)
+            yield(node.data)
+
+        def traverse(self):
+            if self.isEmpty(): print("Empty list")
+            else: return self.__traverse(self.head)
+
+
 class userTreeNode(models.Model):
         data = models.ForeignKey('User', on_delete=models.CASCADE, null=True, blank=True, related_name='dataTreeNode')
+        state = models.TextField(max_length=1, default = '0')
+        schedule = models.ForeignKey('scheduleList', on_delete=models.CASCADE, null=True, blank=True)
         left = models.ForeignKey('userTreeNode', on_delete=models.CASCADE, null=True, blank=True, related_name='leftData')
         right = models.ForeignKey('userTreeNode', on_delete=models.CASCADE, null=True, blank=True, related_name='rightData')
 
@@ -94,6 +138,14 @@ class userBinarySearchTree(models.Model):
         def insert(self, data):
             if self.isEmpty():
                 self.root.data = data
+                thescheduleNode = scheduleListNode(previous=None, data=None, next=None)
+                thescheduleNode.save()
+                theschedule = scheduleList(head=thescheduleNode)
+                theschedule.save()
+                self.root.schedule = theschedule
+                self.root.state = '0'
+                self.root.left = None
+                self.root.right = None
                 self.root.save()
             else:
                 parent, node = self.__find(data)
@@ -101,16 +153,24 @@ class userBinarySearchTree(models.Model):
                     node.data = data
                     return False
                 elif data.name < parent.data.name:
-                    parent.left = userTreeNode(data=data, left = None, right = None)
+                    thescheduleNode = scheduleListNode(previous=None, data=None, next=None)
+                    thescheduleNode.save()
+                    theschedule = scheduleList(head=thescheduleNode)
+                    theschedule.save()
+                    parent.left = userTreeNode(data=data, left = None, right = None, state = '0', schedule = theschedule)
                     parent.left.save()
                 else:
-                    parent.right = userTreeNode(data=data, left = None, right = None)
+                    thescheduleNode = scheduleListNode(previous=None, data=None, next=None)
+                    thescheduleNode.save()
+                    theschedule = scheduleList(head=thescheduleNode)
+                    theschedule.save()
+                    parent.right = userTreeNode(data=data, left = None , right = None, state = '0', schedule = theschedule)
                     parent.right.save()
                 parent.save()
             self.save()    
         
         def traverse(self):
-            if self.isEmpty(): print("Empty tree")
+            if self.isEmpty(): print("Empty tree")  
             else: return self.__traverse(self.root)
 
         def __traverse(self, node):
@@ -123,6 +183,22 @@ class userBinarySearchTree(models.Model):
             yield(node.data)
 
             for rightData in self.__traverse(node.right):
+                yield(rightData)
+
+        def traverseNode(self):
+            if self.isEmpty(): print("Empty tree")  
+            else: return self.__traverseNode(self.root)
+
+        def __traverseNode(self, node):
+            if node is None:
+                return
+            
+            for leftData in self.__traverseNode(node.left):
+                yield(leftData)
+
+            yield(node)
+
+            for rightData in self.__traverseNode(node.right):
                 yield(rightData)
 
         def __promote_sucessor(self, node):                    
