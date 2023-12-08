@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="pt-br">
+<html lang="es-es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
-    <title>Ponteiro</title>
+    <title>Puntero</title>
     <link rel="stylesheet" href="{% static 'css/' %}{{ theme }}/groupEditStyle.css">
 </head>
 
@@ -21,46 +21,46 @@
         <br />
         <br />
         <br />
-        <a class="imghome" href="/ponteiro/{{ id }}/home"><img src="{% static 'img/logo.png' %}" alt="Logo do site"></a>
+        <a class="imghome" href="/ponteiro/{{ id }}/home"><img src="{% static 'img/logo.png' %}" alt="Logotipo del site"></a>
         <hr />
     </header>
 
     {% if error == '0' %}
-    <b>As mudanças foram efetuadas com sucesso!</b>
+    <b>Los cambios se realizaron con éxito.!</b>
     <br />
     <br />
     {% endif %}
 
     {% if error == '1' %}
-    <b>As mudanças não foram efetuadas, a foto é inválida.</b>
+    <b>Los cambios no se realizaron, la foto no es válida..</b>
     <br />
     <br />
     {% endif %}
 
     {% if error == '2' %}
-        <b>As mudanças não foram efetuadas, a descrição deve conter, no máximo, 800 caracteres.</b>
+        <b>Los cambios no fueron realizados, la descripción debe contener un máximo de 800 caracteres.</b>
         <br />
         <br />
     {% endif %}
 
     {% if error == '3' %}
-        <b>As mudanças não foram efetuadas, a senha deve conter entre 5 e 20 caracteres.</b>
+        <b>Los cambios no fueron realizados, la contraseña debe contener entre 5 y 20 caracteres.</b>
         <br />
         <br />
     {% endif %}
 
     {% if error == '4' %}
-        <b>Não foi detectada nenhuma mudança.</b>
+        <b>No se detectaron cambios.</b>
         <br />
         <br />
     {% endif %}
 
     <form action="{% url 'groupeditValidate' id=id groupID=groupID%}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <label for="fileInput">Foto</label>
+        <label for="fileInput">Fotografía</label>
         <input type="file" name="picture">
-        <input class="name" placeholder="Nome: " name="name">
-        <textarea class="description" placeholder="Descrição: " name="description"></textarea>
+        <input class="name" placeholder="Nombre: " name="name">
+        <textarea class="description" placeholder="Descripción: " name="description"></textarea>
         <input type="submit" value="Editar">
     </form>
 
@@ -88,7 +88,7 @@
 
     <footer>
         <hr />
-        <i>PONTEIRO IFSP &copy;</i>
+        <i>PUNTERO IFSP &copy;</i>
     </footer>
 
 </body>

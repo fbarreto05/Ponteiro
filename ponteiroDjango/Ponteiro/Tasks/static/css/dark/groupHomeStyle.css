@@ -17,10 +17,23 @@ body
     text-decoration: none;
 }
 
+#clock
+{
+    color: white;
+}
+
 h1 {
     color: orangered;
     vertical-align: 100%;
     display: inline;
+}
+
+header p
+{
+    color: black;
+    font-size: medium;
+    font-family: Helvetica;
+    margin-left: 10px;
 }
 
 p
@@ -30,14 +43,7 @@ p
     margin-left: 150px;
 }
 
-main img
-{
-    height: 150px;
-    width: 200;
-    border: 2px solid orangered;
-    border-radius: 2px;
-    margin-left: 150px;
-}
+
 
 main h1
 {
@@ -48,6 +54,7 @@ main p
 {
     font-size: 25px;
 }
+
 
 main a
 {
@@ -64,16 +71,45 @@ main a:hover
     background-color: orangered;
 }
 
-nav img
+.topbar
+{
+    height: 15%;
+    width: 100%;
+    background-color: orangered;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 5%;
+    z-index: 0;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.topbar a
+{
+    font-size: 25px;
+    text-decoration: none;
+    color: white;
+    padding: 4% 4%;
+    line-height: 15%;
+}
+
+.topbar a:hover
+{
+    color: orangered;
+    background-color: white;
+}
+
+.sidebar img
 {
     height: 150px;
     width: 150px;
     border: 2px solid white;
     border-radius: 2px;
-
 }
 
-nav
+.sidebar
 {
     height: 100%;
     width: 12%;
@@ -85,7 +121,7 @@ nav
     z-index: 1;
 }
 
-nav a
+.sidebar a
 {
     font-size: 25px;
     display: block;
@@ -94,7 +130,7 @@ nav a
     padding: 20% 10%;
 }
 
-nav a:hover
+.sidebar a:hover
 {
     color: orangered;
     background-color: white;
@@ -103,6 +139,16 @@ nav a:hover
 hr
 {
     border-color: orangered;
+}
+
+button {
+    background-color: orangered;
+    height: 50px;
+    width: 12%;
+    box-sizing: border-box;
+    color: white;
+    margin-left: 900px;
+    display:block;
 }
 
 i 

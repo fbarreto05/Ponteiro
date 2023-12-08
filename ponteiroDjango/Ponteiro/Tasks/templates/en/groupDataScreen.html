@@ -81,8 +81,8 @@
                     <p>{{ userName }} <a href="/ponteiro/{{ id }}/{{ userID }}_profile/">{{ userID }}</a>
                     {% if isAdm %}
                         <br/>
-                        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/remove/?removeId={{ userName }}" style="font-size: small; margin-left: 10px;">Remove</a>
-                        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/promote/?promoteId={{ userName }}" style="font-size: small; margin-left: 10px;">Promote</a>
+                        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/remove/?removeId={{ userID }}" style="font-size: small; margin-left: 10px;">Remove</a>
+                        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/promote/?promoteId={{ userID }}" style="font-size: small; margin-left: 10px;">Promote</a>
                     {% endif %}
                     </p>
                 {% endif %}
@@ -98,8 +98,8 @@
                     <p>{{ adminName }} <a href="/ponteiro/{{ id }}/{{ userID }}_profile/">{{ adminID }}</a>
                     {% if isAdm %}
                         <br/>
-                        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/remove/?removeId={{ adminName }}" style="font-size: small; margin-left: 10px;">Remove</a>
-                        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/demote/?demoteId={{ adminName }}" style="font-size: small; margin-left: 10px;">Demote</a>
+                        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/remove/?removeId={{ adminID }}" style="font-size: small; margin-left: 10px;">Remove</a>
+                        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/demote/?demoteId={{ adminID }}" style="font-size: small; margin-left: 10px;">Demote</a>
                     {% endif %}
                     </p>
                 {% endif %}

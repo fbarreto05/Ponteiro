@@ -3,6 +3,7 @@ header
     margin-left: 150px;
 }
 
+
 body 
 {
     font-family: Helvetica;
@@ -19,50 +20,52 @@ body
 
 h1 {
     color: orangered;
-    vertical-align: 100%;
-    display: inline;
-}
-
-p
-{
-    color: orangered;
-    font-size: 50px;
+    display: block;
     margin-left: 150px;
 }
 
-main img
+b
 {
-    height: 150px;
-    width: 200;
+    margin-left: 150px;
+}
+
+.banner
+{
+    top: 20px;
+    height: 300px;
+    width: 500px;
     border: 2px solid orangered;
     border-radius: 2px;
     margin-left: 150px;
 }
 
-main h1
+p 
 {
-    margin-left: 150px;
-}
-
-main p
-{
+    color: orangered;
     font-size: 25px;
+    border: 1px solid orangered;
+    max-width: 600px;
+    word-wrap: break-word;
+    margin: 0 auto;
+    margin-left: 700px;
 }
 
-main a
+div a
 {
     text-decoration: underline;
     color: orangered;
     font-size: 25px;
-    margin-top: 0;
-    margin-left: 160px;
+    margin-top: 0px;
+    margin-right: 10px;
+    margin-left: 155px;
 }
 
-main a:hover
+div a:hover
 {
     color: white;
     background-color: orangered;
 }
+
 
 nav img
 {
@@ -70,7 +73,6 @@ nav img
     width: 150px;
     border: 2px solid white;
     border-radius: 2px;
-
 }
 
 nav

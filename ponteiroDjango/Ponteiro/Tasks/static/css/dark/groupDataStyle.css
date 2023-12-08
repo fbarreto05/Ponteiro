@@ -23,20 +23,15 @@ h1 {
     display: inline;
 }
 
-p
+p 
 {
     color: orangered;
-    font-size: 50px;
-    margin-left: 150px;
-}
-
-main img
-{
-    height: 150px;
-    width: 200;
-    border: 2px solid orangered;
-    border-radius: 2px;
-    margin-left: 150px;
+    font-size: 25px;
+    border: 1px solid orangered;
+    max-width: 1000px;
+    word-wrap: break-word;
+    margin: 0 auto;
+    margin-left: 500px;
 }
 
 main h1
@@ -64,16 +59,72 @@ main a:hover
     background-color: orangered;
 }
 
-nav img
+.topbar
+{
+    height: 15%;
+    width: 100%;
+    background-color: orangered;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 5%;
+    z-index: 0;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.topbar a
+{
+    font-size: 25px;
+    text-decoration: none;
+    color: white;
+    padding: 4% 4%;
+    line-height: 15%;
+}
+
+.topbar a:hover
+{
+    color: orangered;
+    background-color: white;
+}
+
+.groupPic 
+{
+    top: 20px;
+    height: 300px;
+    width: 500px;
+    border: 2px solid orangered;
+    border-radius: 2px;
+    margin-left: 150px;
+}
+
+.lists
+{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.userList p
+{
+    margin-left: 150px;
+}
+
+.adminList p
+{
+    margin-left: 50px;
+}
+
+.sidebar img
 {
     height: 150px;
     width: 150px;
     border: 2px solid white;
     border-radius: 2px;
-
 }
 
-nav
+.sidebar
 {
     height: 100%;
     width: 12%;
@@ -85,7 +136,7 @@ nav
     z-index: 1;
 }
 
-nav a
+.sidebar a
 {
     font-size: 25px;
     display: block;
@@ -94,7 +145,7 @@ nav a
     padding: 20% 10%;
 }
 
-nav a:hover
+.sidebar a:hover
 {
     color: orangered;
     background-color: white;
