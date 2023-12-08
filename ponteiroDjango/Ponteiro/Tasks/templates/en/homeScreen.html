@@ -22,7 +22,7 @@
     <br />
     <br />
     <br />
-    <img src="{{ picture.url }}" alt="Profile image">
+    <img src="{{ picture.url }}" alt="Profile picture">
     <a href="/ponteiro/{{ id }}/profile/">Profile</a>
     <a href="/ponteiro/{{ id }}/userSearch/">Search user</a>
     <a href="/ponteiro/{{ id }}/home/">Home</a>
@@ -32,13 +32,39 @@
 </nav>
 
 <main>
+    {% if error == '0' %}
+        <p>You have successfully left the group!</p>
+    {% endif %}
+    {% if error == '1' %}
+        <p>Join the group before trying to access it!</p>
+    {% endif %}
+    {% if error == '2' %}
+        <p>Group deleted successfully!</p>
+    {% endif %}
     <hr />
-    <p>Main content will be placed here!</p>
+    <a href="/ponteiro/{{ id }}/home/createGroup/">Create group</a>
+    <a href="/ponteiro/{{ id }}/home/groupSearch/">Search group</a>
+    <br />
+    <br />
+    <br />
+    <div class="groups">
+        <h1>Groups: </h1>
+        </br>
+        {% if groups %}
+            {% for gpPic, gpName, gpID in groupList reversed%}
+                <img src="{{ gpPic.url }}" alt="Group image">
+                </br>
+                <a href="/ponteiro/{{ id }}/group/{{ gpID }}">{{ gpName }}</a><br/><br/>
+            {% endfor %}
+        {% else %}
+            <p>{{ groupList }}</p>
+        {% endif %}
+    </div>
 </main>
 
 <footer>
     <hr />
-    <i>IFSP POINTER &copy;</i>
+    <i>IFSP POINTER&copy;</i>
 </footer>
 
 </body>

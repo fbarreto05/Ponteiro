@@ -15,7 +15,7 @@ class userAdmin(admin.ModelAdmin):
 
 @admin.register(userTreeNode)
 class userAdmin(admin.ModelAdmin):
-    readonly_fields = ('data', 'state', 'left', 'right')
+    readonly_fields = ('data', 'state', 'schedule', 'left', 'right')
 
 @admin.register(userBinarySearchTree)
 class userAdmin(admin.ModelAdmin):

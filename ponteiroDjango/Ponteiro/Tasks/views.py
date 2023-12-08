@@ -12,8 +12,10 @@ import shutil
 from shutil import copyfile
 from django.conf import settings
 from PIL import Image
+import openpyxl
 from django.views.decorators.cache import cache_control
 import secrets
+from datetime import datetime
 
 titlelanguage = 'pt'
 
@@ -524,8 +526,9 @@ def groupHome(request, id, groupID):
         groupName = group_instance.name
         groupID = group_instance.id
         theme = user_instance.theme
+        error = request.GET.get('error')
 
-        return render(request, f'{ language }/groupHomeScreen.html', {'picture' : picture, 'groupName' : groupName, 'groupID' : groupID, 'id' : id, 'theme' : theme, 'language' : language, 'state' : state, 'isADM' : isADM})
+        return render(request, f'{ language }/groupHomeScreen.html', {'picture' : picture, 'groupName' : groupName, 'groupID' : groupID, 'id' : id, 'theme' : theme, 'language' : language, 'state' : state, 'isADM' : isADM, 'error' : error})
     
     else:
         request.session.flush()
@@ -880,24 +883,48 @@ def generateReceipt(request, id, groupID):
         if current == None:
             return redirect(f'/ponteiro/{ id }/home/?error=1')
         
+        receipt = openpyxl.Workbook()
+        page = receipt['Sheet']
+        page.sheet_format.defaultColWidth = 30
+
         schedules = []
         if group_instance.membersList.search(user_instance):
             _, current = group_instance.membersList.search(user_instance)
             if current:
+                page.append(['Name: ' + user_instance.name + '     ID: ' + user_instance.id])
                 node = current.schedule.head
+                count = 0
+                appendData = 'Absent'
                 while node:
-                    schedules.append(node.data)
+                    if node.data:
+                        if count%2 == 0: appendData = 'In: ' + node.data
+                        else: appendData = 'Out: ' + node.data
+                    page.append([appendData])
                     node = node.next
+                    count += 1
 
         _, current = group_instance.adminList.search(user_instance)
         if current:
+            page.append(['Name: ' + user_instance.name + '     ID: ' + user_instance.id])
             node = current.schedule.head
+            count = 0
+            
+            appendData = 'Absent'
             while node:
-                schedules.append(node.data)
+                if node.data:
+                    if count%2 == 0: appendData = 'In: ' + node.data
+                    else: appendData = 'Out: ' + node.data
+                page.append([appendData])
                 node = node.next
-                
-        print(schedules)
-        return redirect(f'/ponteiro/{ id }/group/{ groupID }/')
+                count += 1
+
+
+        date = datetime.now()
+        date = date.strftime("%Y-%m-%d_%H-%M-%S")
+        adress = os.path.join(settings.BASE_DIR, f'media/groups/{groupID}/Receipts/{id}/{date}.xlsx')
+        
+        receipt.save(adress)
+        return redirect(f'/ponteiro/{ id }/group/{ groupID }/?error=0')
     else:
         request.session.flush()
         return redirect('/ponteiro/login/?error=3')
@@ -918,23 +945,57 @@ def generateReport(request, id, groupID):
         if current == None:
             return redirect(f'/ponteiro/{ id }/group/{ groupID }/data/?error=3')
 
+        report = openpyxl.Workbook()
+        
+        page = report['Sheet']
+        page.sheet_format.defaultColWidth = 30
 
         schedules = []
+        header = ['Name', 'ID']
+        page.append(header)
+            
+        for node in group_instance.adminList.traverseNode():
+            nodesch = node.schedule.head
+            count = 0
+            appendData = 'Absent'
+            while nodesch:
+                if nodesch.data:
+                    if count%2 == 0: appendData = 'In ' + nodesch.data
+                    else: appendData = 'Out ' + nodesch.data
+
+                schedules.append(appendData)
+                nodesch = nodesch.next
+                count += 1
+            schedules = [node.data.name] + [node.data.id] + schedules
+            page.append(schedules)
+            schedules = []
+        node.schedule.clear()
+
         if not group_instance.membersList.isEmpty():
             for node in group_instance.membersList.traverseNode():
                 nodesch = node.schedule.head
+                count = 0
+                appendData = 'Absent'
                 while nodesch:
-                    schedules.append(nodesch.data)
-                    nodesch = nodesch.next
+                    if nodesch.data:
+                        if count%2 == 0: appendData = 'In ' + nodesch.data
+                        else: appendData = 'Out ' + nodesch.data
 
-        for node in group_instance.adminList.traverseNode():
-            nodesch = node.schedule.head
-            while nodesch:
-                schedules.append(nodesch.data)
-                nodesch = nodesch.next
+                    schedules.append(appendData)
+                    nodesch = nodesch.next
+                    count += 1
+                schedules = [node.data.name] + [node.data.id] + schedules
+                page.append(schedules)
+                schedules = []
+            node.schedule.clear()
+
+        date = datetime.now()
+        date = date.strftime("%Y-%m-%d_%H-%M-%S")
+        adress = os.path.join(settings.BASE_DIR, f'media/groups/{groupID}/Reports/{date}.xlsx')
         
-        print(schedules)
-        return redirect(f'/ponteiro/{ id }/group/{ groupID }/')
+        report.save(adress)
+        
+        return redirect(f'/ponteiro/{ id }/group/{ groupID }/?error=0')
     else:
         request.session.flush()
         return redirect('/ponteiro/login/?error=3')

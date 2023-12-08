@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es-es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Puntero</title>
+    <link rel="stylesheet" href="{% static 'css/' %}{{ theme }}/createGroupStyle.css">
+</head>
+
+<body>
+
+    <header>
+        <a class="imghome" href="/ponteiro/{{ id }}/home"><img src="{% static 'img/logo.png' %}" alt="Logotipo del site"></a>
+        <hr />
+    </header>
+
+    {% if error == '0' %}
+    <b>¡El grupo fue creado exitosamente!</b>
+    <br />
+    <br />
+    {% endif %}
+
+    {% if error == '1' %}
+    <b>Error al generar la clave de grupo, inténtalo de nuevo.</b>
+    <br />
+    <br />
+    {% endif %}
+
+    {% if error == '2' %}
+        <b>El grupo no fue creado, la foto no es válida..</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '3' %}
+        <b>O grupo não foi criado, o campo de nome está vazio.</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '4' %}
+        <b>El grupo no ha sido creado, el campo de nombre debe tener al menos 5 caracteres.</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '5' %}
+        <b>El grupo no ha sido creado, el campo de nombre debe tener un máximo de 80 caracteres.</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '6' %}
+        <b>El grupo no ha sido creado, el campo de descripción debe tener un máximo de 800 caracteres.</b>
+        <br />
+        <br />
+    {% endif %}
+
+    <form action="{% url 'creategroupValidate' id=id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="fileInput">Fotografía</label>
+        <input type="file" name="picture">
+        <textarea class="name" placeholder="Nome: " name="name"></textarea>
+        <textarea class="description" placeholder="Descrição: " name="description"></textarea>
+        <input type="submit" value="Crear">
+    </form>
+
+    <nav class="sidebar">
+        <br />
+        <br />
+        <br />
+        <img src="{{ picture.url }}" alt="Imagen de perfil">
+        <a href="/ponteiro/{{ id }}/profile/">Perfil</a>
+        <a href="/ponteiro/{{ id }}/userSearch/">Buscar usuario</a>
+        <a href="/ponteiro/{{ id }}/home/">Inicio</a>
+        <a href="/ponteiro/{{ id }}/notifications/">Notificaciones</a>
+        <a href="/ponteiro/{{ id }}/config/">Ajustes</a>
+        <a href="/ponteiro/{{ id }}/logout/">Salir</a>
+    </nav>
+
+    <footer>
+        <hr />
+        <i>PUNTERO IFSP &copy;</i>
+    </footer>
+
+</body>
+
+</html>

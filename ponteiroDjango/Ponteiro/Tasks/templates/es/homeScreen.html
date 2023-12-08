@@ -31,10 +31,35 @@
     <a href="/ponteiro/{{ id }}/logout/">Salir</a>
 </nav>
 
-
 <main>
+    {% if error == '0' %}
+        <p>¡Has abandonado con éxito el grupo!</p>
+    {% endif %}
+    {% if error == '1' %}
+        <p>¡Únete al grupo antes de intentar acceder a él!</p>
+    {% endif %}
+    {% if error == '2' %}
+        <p>¡Grupo eliminado exitosamente!</p>
+    {% endif %}
     <hr />
-    <p>¡El contenido principal se colocará aquí!</p>
+    <a href="/ponteiro/{{ id }}/home/createGroup/">Crea un grupo</a>
+    <a href="/ponteiro/{{ id }}/home/groupSearch/">Grupo de búsqueda</a>
+    <br />
+    <br />
+    <br />
+    <div class="groups">
+        <h1>Grupos: </h1>
+        </br>
+        {% if groups %}
+            {% for gpPic, gpName, gpID in groupList reversed%}
+                <img src="{{ gpPic.url }}" alt="Imagen de grupo">
+                </br>
+                <a href="/ponteiro/{{ id }}/group/{{ gpID }}">{{ gpName }}</a><br/><br/>
+            {% endfor %}
+        {% else %}
+            <p>{{ groupList }}</p>
+        {% endif %}
+    </div>
 </main>
 
 <footer>

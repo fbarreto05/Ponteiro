@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="pt-br">
+<html lang="es-es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
-    <title>Ponteiro</title>
+    <title>Puntero</title>
     <link rel="stylesheet" href="{% static 'css/' %}{{ theme }}/groupHomeStyle.css">
 
     <style>
@@ -34,7 +34,7 @@
     <br/>
     <h1>Bem-vindo ao grupo {{ groupName }}.</h1>
     {% if error == '0' %}
-        <p>Gerado com sucesso!</p>
+        <p>¡Generado exitosamente!</p>
     {% endif %}
     <hr/>
 </header>
@@ -74,26 +74,26 @@
 
 </div>
 
-
 <nav class="sidebar">
     <br />
     <br />
     <br />
-    <img src="{{ picture.url }}" alt="Imagem do perfil">
+    <img src="{{ picture.url }}" alt="Imagen de perfil">
     <a href="/ponteiro/{{ id }}/profile/">Perfil</a>
-    <a href="/ponteiro/{{ id }}/userSearch/">Buscar usuário</a>
-    <a href="/ponteiro/{{ id }}/home/">Início</a>
-    <a href="/ponteiro/{{ id }}/notifications/">Notificações</a>
-    <a href="/ponteiro/{{ id }}/config/">Configurações</a>
-    <a href="/ponteiro/{{ id }}/logout/">Sair</a>
+    <a href="/ponteiro/{{ id }}/userSearch/">Buscar usuario</a>
+    <a href="/ponteiro/{{ id }}/home/">Inicio</a>
+    <a href="/ponteiro/{{ id }}/notifications/">Notificaciones</a>
+    <a href="/ponteiro/{{ id }}/config/">Ajustes</a>
+    <a href="/ponteiro/{{ id }}/logout/">Salir</a>
 </nav>
+
 
 <nav class="topbar">
     <a href="/ponteiro/{{ id }}/group/{{ groupID }}/">Registrador</a>
     <a href="">Chat</a>
     <a href="">Mural</a>
-    <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/">Dados</a>
-    <a href="">Configurações</a>
+    <a href="/ponteiro/{{ id }}/group/{{ groupID }}/data/">Datos</a>
+    <a href="">Ajustes</a>
 </nav>
 
 <main>
@@ -102,15 +102,15 @@
         <input type="hidden" name="value" id="value" value="">
         <input type="hidden" name="timestamp" id="timestamp" value="">  
         {% if state == '1' %}
-            <button type="submit" onclick="performAction(0)">Encerrar</button>
+            <button type="submit" onclick="performAction(0)">Para</button>
         {% else %}
-            <button type="submit" onclick="performAction(1)">Iniciar</button>
+            <button type="submit" onclick="performAction(1)">Comenzar</button>
         {% endif %}
     </form>
 
-    <a href="/ponteiro/{{ id }}/group/{{ groupID }}/generateReceipt"><button>Emitir comprovante</button></a>
+    <a href="/ponteiro/{{ id }}/group/{{ groupID }}/generateReceipt"><button>Generar recibo</button></a>
     {% if isADM %}
-        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/generateReport"><button>Gerar relatório</button></a>
+        <a href="/ponteiro/{{ id }}/group/{{ groupID }}/generateReport"><button>Generar informe</button></a>
     {% endif %}
 
     <script>
@@ -146,7 +146,7 @@
 
 <footer>
     <hr />
-    <i>PONTEIRO IFSP &copy;</i>
+    <i>PUNTERO IFSP &copy;</i>
 </footer>
 
 </body>

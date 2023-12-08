@@ -95,7 +95,8 @@ class scheduleList(models.Model):
 
         def clear(self):
             self.head.data = None
-            self.next = None
+            self.head.next = None
+            self.head.save()
                 
         def __traverse(self, node):
             if node is None:
@@ -257,7 +258,7 @@ class userBinarySearchTree(models.Model):
 
         def nodes(self):
             count = 0
-            for key, data in self.traverse():
+            for index in self.traverse():
                 count += 1
             return count
 

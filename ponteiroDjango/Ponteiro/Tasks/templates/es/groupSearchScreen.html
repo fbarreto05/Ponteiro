@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es-es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="{% static 'img/logo.ico' %}" type="image/x-icon">
+    <title>Puntero</title>
+    <link rel="stylesheet" href="{% static 'css/' %}{{ theme }}/groupSearchStyle.css">
+</head>
+
+<body>
+
+    <header>
+        <a class="imghome" href="/ponteiro/{{ id }}/home"><img src="{% static 'img/logo.png' %}" alt="Logo do site"></a>
+        <br />
+        <br />
+        <h1>Grupo de búsqueda</h1>
+        <hr />
+    </header>
+            
+    {% if error == '1' %}
+        <b>Por favor proporcione la clave del grupo.</b>
+        <br />
+        <br />
+    {% endif %}
+
+    {% if error == '2' %}
+        <b>Grupo no encontrado</b>
+        <br />
+        <br />
+    {% endif %}
+
+    <form action="{% url 'groupsearchValidate' id=id%}" method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="Llave: " name="key">
+        <input type="submit" value="Buscar">
+    </form>
+
+    <nav class="sidebar">
+        <br />
+        <br />
+        <br />
+        <img src="{{ picture.url }}" alt="Imagen de perfil">
+        <a href="/ponteiro/{{ id }}/profile/">Perfil</a>
+        <a href="/ponteiro/{{ id }}/userSearch/">Buscar usuario</a>
+        <a href="/ponteiro/{{ id }}/home/">Inicio</a>
+        <a href="/ponteiro/{{ id }}/notifications/">Notificaciones</a>
+        <a href="/ponteiro/{{ id }}/config/">Ajustes</a>
+        <a href="/ponteiro/{{ id }}/logout/">Salir</a>
+    </nav>
+
+    <footer>
+        <hr />
+        <i>PUNTERO IFSP &copy;</i>
+    </footer>
+</body>
+
+</html>
