@@ -24,6 +24,7 @@ A proposta do projeto Ponteiro foi de criar um sistema simples para gerenciar o 
      - Registrar a presença no grupo
      - Solicitar relatórios de presença
     #### 🚧 (Em construção)
+    - Visualizar um mural de postagens
     - Enviar e receber mensagens
     - Enviar e receber pedidos de amizade
     - Enviar e receber solicitações de entrada em grupo
